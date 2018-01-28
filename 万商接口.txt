@@ -1,0 +1,49 @@
+http://39.106.208.193:8080/ws
+
+省份列表  /api/region/getProvinces
+省-市 /api/region/getCity/xxx  xxx省份id
+市-区 /api/region/getArea/xxx  xxx市id
+热门城市 /api/region/getHotCity
+
+一级分类 /api/category/list/0
+二级分类 /api/category/list/xxx xxx使用一级分类id
+
+区域广告  /api/banner/list/xxx  xxx区域id
+
+获取商户列表  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId
+xxxsecondId   二级分类id
+xxxpageId     多页数据，第一几页 e.g. 1,2,...,10
+xxxareaId     区域id
+
+
+排序规则-人气，获取商户列表  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId/1  在获取商户列表的基础上增加/1
+排序规则-无，获取商户列表  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId/0
+
+
+
+关键字查询，获取商户列表  /api/merchant/query
+POST,key---region,queryText
+
+总推荐查询   /api/merchant/findNum/xxx       xxx手机号
+今日推荐查询 /api/merchant/getReferees/xxx   xxx手机号
+
+验证码获取   /api/msg/sendMsg/xxx            xxx手机号
+
+热门商家   /api/merchant/getHotList/xxxareaId  xxxareaId 区域id
+
+商家详情   /api/merchant/detail/xxx            xxx商家id
+
+入驻商户   /api/merchant/addMerchant
+POST,key---name,region,categoryId,cellphone,mainProducts,adWord,phone,lng,lat,address,imageIdStr(e.g.  45,46)
+
+代理申请   /api/agent/addAgent
+POST,key---image,name,idCard,cellphone,alipayAccount,weixinAccount
+
+修改广告   /api/merchant/changeAd
+POST,key---adWord,id
+
+修改主营   /api/merchant/changeMainProducts
+POST,key---mainProducts,id
+
+图片上传   /api/merchant/uploadImage  单张上传
+POST,key---pic
