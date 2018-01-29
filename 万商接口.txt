@@ -10,10 +10,15 @@ http://39.106.208.193:8080/ws
 
 区域广告  /api/banner/list/xxx  xxx区域id
 
+***************************************************************************
+废弃  
 获取商户列表  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId
 xxxsecondId   二级分类id
 xxxpageId     多页数据，第一几页 e.g. 1,2,...,10
-xxxareaId     区域id
+xxxareaId     区域id
+新的
+获取商户列表  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId/0
+***************************************************************************
 
 
 排序规则-人气，获取商户列表  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId/1  在获取商户列表的基础上增加/1
