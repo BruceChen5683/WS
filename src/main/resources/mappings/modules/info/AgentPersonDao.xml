@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.sc.modules.info.dao.AgentPersonDao">
+    
+	<sql id="agentPersonColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.id_card AS "idCard",
+		a.cellphone AS "cellphone",
+		a.alipay_account AS "alipayAccount",
+		a.weixin_account AS "weixinAccount",
+		a.id_card_image AS "idCardImage",
+		a.state AS "state"
+	</sql>
+	
+	<sql id="agentPersonJoins">
+	</sql>
+    
+	<select id="get" resultType="AgentPerson">
+		SELECT 
+			<include refid="agentPersonColumns"/>
+		FROM com_agent_person a
+		<include refid="agentPersonJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="AgentPerson">
+		SELECT 
+			<include refid="agentPersonColumns"/>
+		FROM com_agent_person a
+		<include refid="agentPersonJoins"/>
+		<where>
+			
+			<if test="idCard != null and idCard != ''">
+				AND a.id_card = #{idCard}
+			</if>
+			<if test="cellphone != null and cellphone != ''">
+				AND a.cellphone = #{cellphone}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="AgentPerson">
+		SELECT 
+			<include refid="agentPersonColumns"/>
+		FROM com_agent_person a
+		<include refid="agentPersonJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO com_agent_person(
+			name,
+			id_card,
+			cellphone,
+			alipay_account,
+			weixin_account,
+			id_card_image,
+			state
+		) VALUES (
+			#{name},
+			#{idCard},
+			#{cellphone},
+			#{alipayAccount},
+			#{weixinAccount},
+			#{idCardImage},
+			#{state}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE com_agent_person SET 	
+								<if test="name !=null">
+					name = #{name},
+					</if>
+					<if test="id_card !=null">
+					id_card = #{idCard},
+					</if>
+					<if test="cellphone !=null">
+					cellphone = #{cellphone},
+					</if>
+					<if test="alipay_account !=null">
+					alipay_account = #{alipayAccount},
+					</if>
+					<if test="weixin_account !=null">
+					weixin_account = #{weixinAccount},
+					</if>
+					<if test="id_card_image !=null">
+					id_card_image = #{idCardImage},
+					</if>
+					<if test="state !=null">
+					state = #{state},
+					</if>
+
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM com_agent_person
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.sc.modules.info.dao.TradeOrderDao">
+
+    <sql id="tradeOrderColumns">
+		a.id AS "id",
+		a.trade_no AS "tradeNo",
+		a.merchant_id AS "merchantId",
+		a.money AS "money",
+		a.state AS "state",
+		a.platforms AS "platforms",
+		a.pay_account AS "payAccount",
+		a.pay_date AS "payDate",
+		a.create_date AS "createDate"
+	</sql>
+
+    <sql id="tradeOrderJoins">
+    </sql>
+
+    <select id="get" resultType="TradeOrder">
+        SELECT
+        <include refid="tradeOrderColumns"/>
+        FROM com_trade_order a
+        <include refid="tradeOrderJoins"/>
+        WHERE a.id = #{id}
+    </select>
+    <select id="findByMerchantId" resultType="TradeOrder">
+        SELECT
+        <include refid="tradeOrderColumns"/>
+        FROM com_trade_order a
+        <include refid="tradeOrderJoins"/>
+        WHERE a.merchant_id = #{0} and state=0 limit 0,1
+    </select>
+    <select id="getByTradeNo" resultType="TradeOrder">
+        SELECT
+        <include refid="tradeOrderColumns"/>
+        FROM com_trade_order a
+        <include refid="tradeOrderJoins"/>
+        WHERE a.trade_no = #{0}
+    </select>
+
+    <select id="findList" resultType="TradeOrder">
+        SELECT
+        <include refid="tradeOrderColumns"/>
+        FROM com_trade_order a
+        <include refid="tradeOrderJoins"/>
+        <where>
+
+            <if test="tradeNo != null and tradeNo != ''">
+                AND a.trade_no = #{tradeNo}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                AND a.merchant_id = #{merchantId}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="TradeOrder">
+        SELECT
+        <include refid="tradeOrderColumns"/>
+        FROM com_trade_order a
+        <include refid="tradeOrderJoins"/>
+        <where>
+
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO com_trade_order(
+			trade_no,
+			merchant_id,
+			money,
+			state,
+			platforms,
+			pay_account,
+			pay_date,
+			create_date
+		) VALUES (
+			#{tradeNo},
+			#{merchantId},
+			#{money},
+			#{state},
+			#{platforms},
+			#{payAccount},
+			#{payDate},
+			#{createDate}
+		)
+	</insert>
+
+    <update id="update">
+        UPDATE com_trade_order SET
+        <if test="tradeNo !=null">
+            trade_no = #{tradeNo},
+        </if>
+        <if test="merchantId !=null">
+            merchant_id = #{merchantId},
+        </if>
+        <if test="money !=null">
+            money = #{money},
+        </if>
+        <if test="state !=null">
+            state = #{state},
+        </if>
+        <if test="platforms !=null">
+            platforms = #{platforms},
+        </if>
+        <if test="payAccount !=null">
+            pay_account = #{payAccount},
+        </if>
+        <if test="payDate !=null">
+            pay_date = #{payDate},
+        </if>
+        version=version+1
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+		DELETE FROM com_trade_order
+		WHERE id = #{id}
+	</update>
+
+</mapper>

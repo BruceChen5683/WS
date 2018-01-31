@@ -1,0 +1,102 @@
+/*{   "resultMsg":"OK", 
+    "resultCode": 200,
+    "resultInfo":[
+        {
+            "name":"BA1",
+            "childs":[
+                {
+                    "img":"static/images/aa.png",
+                    "name":"C1"
+                },
+                {
+                    "img":"static/images/aa.png",
+                    "name":"C2"
+                },
+                {
+                    "img":"static/images/aa.png",
+                    "name":"C3"
+                }
+            ]
+        },
+        {
+            "name":"BA2",
+            "childs":[
+                {
+                    "img":"static/images/aa.png",
+                    "name":"C4"
+                },
+                {
+                    "img":"static/images/aa.png",
+                    "name":"C5"
+                }
+            ]
+        }
+    ],
+    "token":null, 
+    "page": null
+}*/
+
+
+
+{
+  "resultMsg": "OK",
+  "resultCode": 200,
+  "resultInfo": {
+    "functionConf": {
+      "confList": [
+        {
+          "id": 1,
+          "functionId": 1,
+          "choosableParams": "衣通型号",
+          "choosableValue": "巴赫曼",
+          "functionDistrictName": "功能区1"
+        },
+        {
+          "id": 2,
+          "functionId": 1,
+          "choosableParams": "层板规格",
+          "choosableValue": "5*5",
+          "functionDistrictName": "功能区1"
+        }
+      ]
+    },
+    "numAndHeight": [
+      {
+        "id": 1,
+        "unitCabinetId": 1,
+        "functionId": 2,
+        "heightMax": 300, // 最大值
+        "heightMin": 500, //最小值
+        "value": "",
+        "functionDistrictName": "功能区1",  //功能区名称
+        "widthMax": 500,
+        "widthMin": 800
+      },
+      {
+        "id": 2,
+        "unitCabinetId": 1,
+        "functionId": 1,
+        "heightMax": 500,
+        "heightMin": 600,
+        "value": "",
+        "functionDistrictName": "功能区2",
+        "widthMax": 800,
+        "widthMin": 900
+      }
+    ]
+    "number": [
+        {
+            "drawerNumber": 2, //抽屉数量（最大值）
+            "laminateNumber": 3, //层板
+        }
+        {
+            "drawerNumber": 2, //抽屉数量（最大值）
+            "laminateNumber": 3, //层板
+        }
+    ]
+  },
+  "token": null,
+  "page": null
+}
+
+

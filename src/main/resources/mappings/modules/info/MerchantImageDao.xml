@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.sc.modules.info.dao.MerchantImageDao">
+
+    <sql id="merchantImageColumns">
+		a.id AS "id",
+		a.pic_url AS "picUrl",
+		a.merchant_id AS "merchantId",
+		a.pic_type AS "picType"
+	</sql>
+
+    <sql id="merchantImageJoins">
+    </sql>
+
+    <select id="get" resultType="MerchantImage">
+        SELECT
+        <include refid="merchantImageColumns"/>
+        FROM com_merchant_image a
+        <include refid="merchantImageJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="MerchantImage">
+        SELECT
+        <include refid="merchantImageColumns"/>
+        FROM com_merchant_image a
+        <include refid="merchantImageJoins"/>
+        <where>
+
+            <if test="merchantId != null and merchantId != ''">
+                AND a.merchant_id = #{merchantId}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="MerchantImage">
+        SELECT
+        <include refid="merchantImageColumns"/>
+        FROM com_merchant_image a
+        <include refid="merchantImageJoins"/>
+        <where>
+
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO com_merchant_image(
+			pic_url,
+			merchant_id,
+			pic_type
+		) VALUES (
+			#{picUrl},
+			#{merchantId},
+			#{picType}
+		)
+	</insert>
+
+    <update id="update">
+        UPDATE com_merchant_image SET
+        <if test="pic_url !=null">
+            pic_url = #{picUrl},
+        </if>
+        <if test="merchant_id !=null">
+            merchant_id = #{merchantId},
+        </if>
+        <if test="pic_type !=null">
+            pic_type = #{picType},
+        </if>
+
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateMerchant">
+        update com_merchant_image set merchant_id=#{merchantId} where id in
+        <foreach collection="ids" separator="," open="(" close=")" item="id">#{id}</foreach>
+    </update>
+    <select id="findListByMerchant" resultType="String">
+        select pic_url from com_merchant_image where merchant_id=#{0}
+    </select>
+</mapper>

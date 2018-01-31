@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.sc.modules.info.dao.AreasDao">
+
+    <sql id="areasColumns">
+		a.id AS "id",
+		a.area AS "area",
+		a.cityid AS "cityid"
+	</sql>
+
+    <sql id="areasJoins">
+    </sql>
+
+    <select id="get" resultType="Areas">
+        SELECT
+        <include refid="areasColumns"/>
+        FROM com_areas a
+        <include refid="areasJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="Areas">
+        SELECT
+        <include refid="areasColumns"/>
+        FROM com_areas a
+        <include refid="areasJoins"/>
+        <where>
+            1=1
+            <if test="cityid!=null">
+                and a.cityid=#{cityid}
+            </if>
+
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="Areas">
+        SELECT
+        <include refid="areasColumns"/>
+        FROM com_areas a
+        <include refid="areasJoins"/>
+        <where>
+
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO com_areas(
+			area,
+			cityid
+		) VALUES (
+			#{area},
+			#{cityid}
+		)
+	</insert>
+
+    <update id="update">
+        UPDATE com_areas SET
+        <if test="area !=null">
+            area = #{area},
+        </if>
+        <if test="cityid !=null">
+            cityid = #{cityid},
+        </if>
+
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+		DELETE FROM com_areas
+		WHERE id = #{id}
+	</update>
+
+</mapper>

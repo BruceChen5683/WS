@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.sc.modules.info.dao.ProvincesDao">
+
+    <sql id="provincesColumns">
+		a.id AS "id",
+		a.province AS "province"
+	</sql>
+
+    <sql id="provincesJoins">
+    </sql>
+
+    <select id="get" resultType="Provinces">
+        SELECT
+        <include refid="provincesColumns"/>
+        FROM com_provinces a
+        <include refid="provincesJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="Provinces">
+        SELECT
+        <include refid="provincesColumns"/>
+        FROM com_provinces a
+        <include refid="provincesJoins"/>
+        <where>
+
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="Provinces">
+        SELECT
+        <include refid="provincesColumns"/>
+        FROM com_provinces a
+        <include refid="provincesJoins"/>
+        <where>
+
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO com_provinces(
+			province
+		) VALUES (
+			#{province}
+		)
+	</insert>
+
+    <update id="update">
+        UPDATE com_provinces SET
+        <if test="provinceid !=null">
+            provinceid = #{provinceid},
+        </if>
+        <if test="province !=null">
+            province = #{province},
+        </if>
+
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+		DELETE FROM com_provinces
+		WHERE id = #{id}
+	</update>
+
+</mapper>

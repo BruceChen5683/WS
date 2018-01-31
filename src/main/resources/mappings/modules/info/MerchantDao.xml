@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.sc.modules.info.dao.MerchantDao">
+
+    <sql id="comMerchantColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.region AS "region",
+		a.category_id AS "categoryId",
+		a.cellphone AS "cellphone",
+		a.logo_url AS "logoUrl",
+		a.referee AS "referee",
+		a.referee_cellphone AS "refereeCellphone",
+		a.attend_date AS "attendDate",
+		a.main_products AS "mainProducts",
+		a.ad_word AS "adWord",
+		a.type AS "type",
+		a.state AS "state",
+		a.phone AS "phone",
+		a.view_num AS "viewNum",
+		a.lng AS "lng",
+		a.lat AS "lat",
+		a.sort as "sort",
+		a.is_hot as "isHot",
+		a.address as "address",
+		a.is_auth as "isAuth"
+	</sql>
+
+    <sql id="comMerchantJoins">
+    </sql>
+
+    <select id="get" resultType="Merchant">
+        SELECT
+        <include refid="comMerchantColumns"/>
+        FROM com_merchant a
+        <include refid="comMerchantJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="Merchant">
+        SELECT
+        <include refid="comMerchantColumns"/>
+        FROM com_merchant a
+        <include refid="comMerchantJoins"/>
+        <where>
+
+            <if test="name != null and name != ''">
+                AND a.name LIKE
+                <if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+            </if>
+            <if test="region != null and region != ''">
+                AND a.region = #{region}
+            </if>
+            <if test="categoryId != null and categoryId != ''">
+                AND a.category_id = #{categoryId}
+            </if>
+            <if test="mainProducts != null and mainProducts != ''">
+                AND a.main_products LIKE
+                <if test="dbName == 'oracle'">'%'||#{mainProducts}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+#{mainProducts}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%',#{mainProducts},'%')</if>
+            </if>
+            <if test="adWord != null and adWord != ''">
+                AND a.ad_word LIKE concat('%',#{adWord},'%')
+            </if>
+            <if test="phone != null and phone != ''">
+                AND a.phone LIKE
+                <if test="dbName == 'mysql'">concat('%',#{phone},'%')</if>
+            </if>
+            <if test="queryText != null and queryText != ''">
+                and (a.phone LIKE concat('%',#{queryText},'%')
+                or a.main_products LIKE concat('%',#{queryText},'%')
+                or a.ad_word LIKE concat('%',#{queryText},'%')
+                or a.name LIKE concat('%',#{queryText},'%')
+                or a.address LIKE concat('%',#{queryText},'%')
+                )
+            </if>
+        </where>
+
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+        <if test="queryText != null and queryText != ''">
+            limit 0,10
+        </if>
+    </select>
+
+    <select id="findAllList" resultType="Merchant">
+        SELECT
+        <include refid="comMerchantColumns"/>
+        FROM com_merchant a
+        <include refid="comMerchantJoins"/>
+        <where>
+
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO com_merchant(
+			name,
+			region,
+			category_id,
+			cellphone,
+			logo_url,
+			referee,
+			referee_cellphone,
+			attend_date,
+			main_products,
+			ad_word,
+			type,
+			state,
+			phone,
+			view_num,
+			lng,
+			lat,
+			address,
+			is_auth
+		) VALUES (
+			#{name},
+			#{region},
+			#{categoryId},
+			#{cellphone},
+			#{logoUrl},
+			#{referee},
+			#{refereeCellphone},
+			#{attendDate},
+			#{mainProducts},
+			#{adWord},
+			#{type},
+			#{state},
+			#{phone},
+			#{viewNum},
+			#{lng},
+			#{lat},
+			#{address},
+			0
+		)
+	</insert>
+
+    <update id="update">
+        UPDATE com_merchant SET
+        <if test="name !=null">
+            name = #{name},
+        </if>
+        <if test="region !=null">
+            region = #{region},
+        </if>
+        <if test="categoryId !=null">
+            category_id = #{categoryId},
+        </if>
+        <if test="cellphone !=null">
+            cellphone = #{cellphone},
+        </if>
+        <if test="logoUrl !=null">
+            logo_url = #{logoUrl},
+        </if>
+        <if test="referee !=null">
+            referee = #{referee},
+        </if>
+        <if test="refereeCellphone !=null">
+            referee_cellphone = #{refereeCellphone},
+        </if>
+        <if test="attendDate !=null">
+            attend_date = #{attendDate},
+        </if>
+        <if test="mainProducts !=null">
+            main_products = #{mainProducts},
+        </if>
+        <if test="adWord !=null">
+            ad_word = #{adWord},
+        </if>
+        <if test="type !=null">
+            type = #{type},
+        </if>
+        <if test="state !=null">
+            state = #{state},
+        </if>
+        <if test="phone !=null">
+            phone = #{phone},
+        </if>
+        <if test="viewNum !=null">
+            view_num = #{viewNum},
+        </if>
+        <if test="lng !=null">
+            lng = #{lng},
+        </if>
+        <if test="lat !=null">
+            lat = #{lat},
+        </if>
+        <if test="address !=null">
+            address = #{address},
+        </if>
+        <if test="isAuth !=null">
+            is_auth = #{isAuth},
+        </if>
+        version=version+1
+        WHERE id = #{id}
+    </update>
+
+    <select id="getHotList" resultType="Merchant">
+        SELECT
+        <include refid="comMerchantColumns"/>
+        FROM com_merchant a
+        where a.is_Hot=1 and a.region=#{0}
+        order by sort
+        limit 0, 6
+    </select>
+
+    <update id="delete">
+		DELETE FROM com_merchant
+		WHERE id = #{id}
+	</update>
+    <select id="findNum" resultType="Integer">
+        select count(*) from com_merchant where referee_cellphone=#{cellphone}
+        <if test="queryDate!=null">
+            and attend_date=#{queryDate}
+        </if>
+    </select>
+    <update id="updateViewNum">
+        update com_merchant set view_num=view_num+1 where id=#{0}
+    </update>
+</mapper>
