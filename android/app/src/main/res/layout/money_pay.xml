@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/rlAli"
+        style="@style/dialog_pay_item_rl">
+        <ImageView
+            android:id="@+id/ivAliPay"
+            style="@style/dialog_pay_left_iv"
+            android:src="@mipmap/icon_business_alipay" />
+        <TextView
+            android:layout_toRightOf="@+id/ivAliPay"
+            android:id="@+id/tvAliTitle"
+            style="@style/dialog_pay_text"
+            android:text="支付宝支付"/>
+        <ImageView
+            android:id="@+id/ivAliConfim"
+            style="@style/dialog_pay_right_iv"
+            android:src="@mipmap/icon_business_confirm"
+            android:visibility="visible"/>
+    </RelativeLayout>
+
+    <View
+        style="@style/dialog_pad_mid_line">
+    </View>
+
+    <RelativeLayout
+        android:id="@+id/rlWeChat"
+        style="@style/dialog_pay_item_rl">
+        <ImageView
+            android:id="@+id/ivWeChat"
+            style="@style/dialog_pay_left_iv"
+            android:src="@mipmap/icon_business_wechat" />
+        <TextView
+            android:layout_toRightOf="@+id/ivWeChat"
+            android:id="@+id/tvWeChatTitle"
+            style="@style/dialog_pay_text"
+            android:text="微信支付"/>
+        <ImageView
+            android:id="@+id/ivWeChatConfim"
+            style="@style/dialog_pay_right_iv"
+            android:src="@mipmap/icon_business_confirm"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/dialog_pay_item_rl_small">
+
+        <ImageView
+            android:id="@+id/ivHint"
+            style="@style/dialog_pay_item_rl_small_iv"
+            android:src="@mipmap/icon_recommend_hint"/>
+        <TextView
+            android:id="@+id/tvEnterMoney"
+            style="@style/dialog_pay_item_rl_small_tv"
+            android:layout_toRightOf="@+id/ivHint"
+            android:text="审核不通过不会收取任何费用。" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/llRecommendEnter"
+        style="@style/dialog_pay_rl_mid">
+        <TextView
+            style="@style/dialog_pay_bottom_text"
+            android:text="支付年入驻费20元" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HotelAdertisment">
+            <rect key="frame" x="0.0" y="0.0" width="279" height="248"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COI-Fd-WlA">
+                    <rect key="frame" x="0.0" y="0.0" width="279" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6I-GV-E2P">
+                            <rect key="frame" x="0.0" y="0.0" width="279" height="50"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" red="0.94891971350000004" green="0.94907873870000004" blue="0.9488974214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.87795811891555786" green="0.022209657356142998" blue="0.011281583458185196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Rfm-XM-IOR"/>
+                        <constraint firstAttribute="trailing" secondItem="C6I-GV-E2P" secondAttribute="trailing" id="WA7-Qy-1mT"/>
+                        <constraint firstItem="C6I-GV-E2P" firstAttribute="leading" secondItem="COI-Fd-WlA" secondAttribute="leading" id="a1A-PK-DDr"/>
+                        <constraint firstItem="C6I-GV-E2P" firstAttribute="top" secondItem="COI-Fd-WlA" secondAttribute="top" id="cyh-ZS-9hT"/>
+                        <constraint firstAttribute="bottom" secondItem="C6I-GV-E2P" secondAttribute="bottom" id="xdh-IW-CfH"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZt-qG-lco">
+                    <rect key="frame" x="0.0" y="200" width="279" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Hn7-Gr-Lv6"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lx7-Ye-es3">
+                    <rect key="frame" x="0.0" y="201" width="279" height="47"/>
+                    <state key="normal" title="修改广告内容">
+                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="doClickModifyBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="eaD-qf-RhS"/>
+                    </connections>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consec" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WId-Hx-7fd">
+                    <rect key="frame" x="0.0" y="50" width="279" height="150"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="DAJ-80-eGw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Lx7-Ye-es3" firstAttribute="top" secondItem="CZt-qG-lco" secondAttribute="bottom" id="23M-Yc-Nrp"/>
+                <constraint firstItem="CZt-qG-lco" firstAttribute="top" secondItem="WId-Hx-7fd" secondAttribute="bottom" id="2j3-yf-bDX"/>
+                <constraint firstAttribute="bottom" secondItem="Lx7-Ye-es3" secondAttribute="bottom" id="6db-yB-pBR"/>
+                <constraint firstItem="WId-Hx-7fd" firstAttribute="top" secondItem="COI-Fd-WlA" secondAttribute="bottom" id="L5Y-mD-2e0"/>
+                <constraint firstItem="WId-Hx-7fd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TxY-6q-zEJ"/>
+                <constraint firstItem="COI-Fd-WlA" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="VRR-2v-OBw"/>
+                <constraint firstItem="CZt-qG-lco" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Z3L-VM-C88"/>
+                <constraint firstAttribute="trailing" secondItem="WId-Hx-7fd" secondAttribute="trailing" id="jOF-ac-IMi"/>
+                <constraint firstItem="COI-Fd-WlA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nMC-89-HC8"/>
+                <constraint firstAttribute="trailing" secondItem="CZt-qG-lco" secondAttribute="trailing" id="p6Z-cO-iSJ"/>
+                <constraint firstAttribute="trailing" secondItem="Lx7-Ye-es3" secondAttribute="trailing" id="wc9-Od-XaL"/>
+                <constraint firstItem="COI-Fd-WlA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ypM-C9-40T"/>
+                <constraint firstItem="Lx7-Ye-es3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zCj-cR-6zy"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="clickBtn" destination="Lx7-Ye-es3" id="8T7-El-fIm"/>
+                <outlet property="content" destination="WId-Hx-7fd" id="FGb-4h-azl"/>
+                <outlet property="titleLbl" destination="C6I-GV-E2P" id="wMi-RY-VSu"/>
+            </connections>
+            <point key="canvasLocation" x="-11.5" y="100"/>
+        </view>
+    </objects>
+</document>
