@@ -52,3 +52,5 @@ POST,key---mainProducts,id
 
 图片上传   /api/merchant/uploadImage  单张上传
 POST,key---pic
+
+支付  /api/pay/toPay/xxx    xxx商家id
