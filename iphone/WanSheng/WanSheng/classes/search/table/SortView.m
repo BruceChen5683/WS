@@ -102,6 +102,8 @@
     }
     
     self.selectIndex = indexPath.row;
+    CatagoryModel * m = self.dataSource[indexPath.row];
+    self.recordLeft = m;
     [self.leftTable reloadData];
 
     

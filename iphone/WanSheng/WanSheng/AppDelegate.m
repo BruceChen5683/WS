@@ -36,8 +36,8 @@
     [self sdRegister];
     
     BMKMapManager *mapManager = [[BMKMapManager alloc] init];
-    //Mag1QmV2Gwt9rFKVj3aV4I3zRsifb7IB
-    //hTlvChEo54AZiTXf0iutnUv9qRbtziLK
+    //Mag1QmV2Gwt9rFKVj3aV4I3zRsifb7IB   ws
+    //hTlvChEo54AZiTXf0iutnUv9qRbtziLK   dr
     BOOL ret = [mapManager start:@"Mag1QmV2Gwt9rFKVj3aV4I3zRsifb7IB" generalDelegate:nil];
     if (!ret) {
         NSLog(@"百度地图启动失败");
