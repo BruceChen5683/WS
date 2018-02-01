@@ -341,7 +341,8 @@
 - (BMKLocationService *)locationService {
     if (!_locationService) {
         _locationService =  [[BMKLocationService alloc] init];
-        self.locationService.delegate = self;
+        _locationService.desiredAccuracy = 100;
+        _locationService.delegate = self;
     }
     return _locationService;
 }
