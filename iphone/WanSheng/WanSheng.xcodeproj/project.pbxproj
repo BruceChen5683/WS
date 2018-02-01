@@ -151,6 +151,14 @@
 		34E0B6AD20175C8400405483 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E0B6AC20175C8400405483 /* libc++.tbd */; };
 		34E0B6AF20175C8C00405483 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E0B6AE20175C8C00405483 /* libz.tbd */; };
 		34E0B6B120175FE400405483 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E0B6B020175FE300405483 /* CoreMotion.framework */; };
+		34E4E79A2022BED6003F0D56 /* SDWebImageManager+ZK.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E4E78C2022BED6003F0D56 /* SDWebImageManager+ZK.m */; };
+		34E4E79B2022BED6003F0D56 /* ZKPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 34E4E78D2022BED6003F0D56 /* ZKPhotoBrowser.bundle */; };
+		34E4E79C2022BED6003F0D56 /* ZKPhotoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E4E78F2022BED6003F0D56 /* ZKPhotoLoadingView.m */; };
+		34E4E79D2022BED6003F0D56 /* ZKPhotoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E4E7912022BED6003F0D56 /* ZKPhotoProgressView.m */; };
+		34E4E79E2022BED6003F0D56 /* ZKPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E4E7932022BED6003F0D56 /* ZKPhoto.m */; };
+		34E4E79F2022BED6003F0D56 /* ZKPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E4E7952022BED6003F0D56 /* ZKPhotoBrowser.m */; };
+		34E4E7A02022BED6003F0D56 /* ZKPhotoToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E4E7972022BED6003F0D56 /* ZKPhotoToolbar.m */; };
+		34E4E7A12022BED6003F0D56 /* ZKPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E4E7992022BED6003F0D56 /* ZKPhotoView.m */; };
 		34EC25C02003012000A6987C /* MyWS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34EC25BF2003012000A6987C /* MyWS.storyboard */; };
 		34EC25C2200303C900A6987C /* RecommendStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34EC25C1200303C900A6987C /* RecommendStoryboard.storyboard */; };
 		34EC25C620032D1400A6987C /* ContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EC25C520032D1400A6987C /* ContentTableViewCell.m */; };
@@ -543,6 +551,21 @@
 		34E0B6AC20175C8400405483 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		34E0B6AE20175C8C00405483 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		34E0B6B020175FE300405483 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		34E4E78B2022BED6003F0D56 /* SDWebImageManager+ZK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageManager+ZK.h"; sourceTree = "<group>"; };
+		34E4E78C2022BED6003F0D56 /* SDWebImageManager+ZK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageManager+ZK.m"; sourceTree = "<group>"; };
+		34E4E78D2022BED6003F0D56 /* ZKPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZKPhotoBrowser.bundle; sourceTree = "<group>"; };
+		34E4E78E2022BED6003F0D56 /* ZKPhotoLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKPhotoLoadingView.h; sourceTree = "<group>"; };
+		34E4E78F2022BED6003F0D56 /* ZKPhotoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKPhotoLoadingView.m; sourceTree = "<group>"; };
+		34E4E7902022BED6003F0D56 /* ZKPhotoProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKPhotoProgressView.h; sourceTree = "<group>"; };
+		34E4E7912022BED6003F0D56 /* ZKPhotoProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKPhotoProgressView.m; sourceTree = "<group>"; };
+		34E4E7922022BED6003F0D56 /* ZKPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKPhoto.h; sourceTree = "<group>"; };
+		34E4E7932022BED6003F0D56 /* ZKPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKPhoto.m; sourceTree = "<group>"; };
+		34E4E7942022BED6003F0D56 /* ZKPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKPhotoBrowser.h; sourceTree = "<group>"; };
+		34E4E7952022BED6003F0D56 /* ZKPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKPhotoBrowser.m; sourceTree = "<group>"; };
+		34E4E7962022BED6003F0D56 /* ZKPhotoToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKPhotoToolbar.h; sourceTree = "<group>"; };
+		34E4E7972022BED6003F0D56 /* ZKPhotoToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKPhotoToolbar.m; sourceTree = "<group>"; };
+		34E4E7982022BED6003F0D56 /* ZKPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKPhotoView.h; sourceTree = "<group>"; };
+		34E4E7992022BED6003F0D56 /* ZKPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKPhotoView.m; sourceTree = "<group>"; };
 		34EC25BF2003012000A6987C /* MyWS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyWS.storyboard; sourceTree = "<group>"; };
 		34EC25C1200303C900A6987C /* RecommendStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecommendStoryboard.storyboard; sourceTree = "<group>"; };
 		34EC25C420032D1400A6987C /* ContentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentTableViewCell.h; sourceTree = "<group>"; };
@@ -1324,6 +1347,36 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		34E4E7892022BED6003F0D56 /* ZKPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				34E4E78A2022BED6003F0D56 /* Supporting */,
+				34E4E7922022BED6003F0D56 /* ZKPhoto.h */,
+				34E4E7932022BED6003F0D56 /* ZKPhoto.m */,
+				34E4E7942022BED6003F0D56 /* ZKPhotoBrowser.h */,
+				34E4E7952022BED6003F0D56 /* ZKPhotoBrowser.m */,
+				34E4E7962022BED6003F0D56 /* ZKPhotoToolbar.h */,
+				34E4E7972022BED6003F0D56 /* ZKPhotoToolbar.m */,
+				34E4E7982022BED6003F0D56 /* ZKPhotoView.h */,
+				34E4E7992022BED6003F0D56 /* ZKPhotoView.m */,
+			);
+			path = ZKPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		34E4E78A2022BED6003F0D56 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				34E4E78B2022BED6003F0D56 /* SDWebImageManager+ZK.h */,
+				34E4E78C2022BED6003F0D56 /* SDWebImageManager+ZK.m */,
+				34E4E78D2022BED6003F0D56 /* ZKPhotoBrowser.bundle */,
+				34E4E78E2022BED6003F0D56 /* ZKPhotoLoadingView.h */,
+				34E4E78F2022BED6003F0D56 /* ZKPhotoLoadingView.m */,
+				34E4E7902022BED6003F0D56 /* ZKPhotoProgressView.h */,
+				34E4E7912022BED6003F0D56 /* ZKPhotoProgressView.m */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
 		34EC25C320032C7A00A6987C /* table */ = {
 			isa = PBXGroup;
 			children = (
@@ -1422,6 +1475,7 @@
 		34F3E7701FFE018C00751B28 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				34E4E7892022BED6003F0D56 /* ZKPhotoBrowser */,
 				34E0B64E20175C4A00405483 /* alipay */,
 				34F4E7892011ED2400EE6E72 /* wechatShare */,
 				34450A03200DC9390022FBE1 /* XLRefresh */,
@@ -1622,6 +1676,7 @@
 				34250C4D20045BDB005B082A /* SuPhoto_selected@2x.png in Resources */,
 				34250C4E20045BDB005B082A /* SuPhoto_unselected@2x.png in Resources */,
 				341C62DB200796C200FC4EEB /* Images.xcassets in Resources */,
+				34E4E79B2022BED6003F0D56 /* ZKPhotoBrowser.bundle in Resources */,
 				34250D0B2004F09A005B082A /* HotelImgTitleTableViewCell.xib in Resources */,
 				34250D112004F0B0005B082A /* jdgb1_return2@3x.png in Resources */,
 				34F3E76B1FFDF56B00751B28 /* WanShengKind.storyboard in Resources */,
@@ -1761,6 +1816,7 @@
 				34250C9320046528005B082A /* CTAssembleResponse.m in Sources */,
 				34EC25CD20033AA400A6987C /* AboutWSViewController.m in Sources */,
 				34250C9B20046528005B082A /* SBJsonStreamParserState.m in Sources */,
+				34E4E79C2022BED6003F0D56 /* ZKPhotoLoadingView.m in Sources */,
 				34250C3E20045BDB005B082A /* UIButton+SU.m in Sources */,
 				3443B6221FFDD206002E3C0A /* SearchViewController.m in Sources */,
 				34250C9D20046528005B082A /* SBJsonStreamWriterAccumulator.m in Sources */,
@@ -1772,6 +1828,7 @@
 				34250C9620046528005B082A /* NSObject+SBJson.m in Sources */,
 				3443B6131FFDD1B4002E3C0A /* BaseViewController.m in Sources */,
 				34F3E8051FFF6D4E00751B28 /* HomePMDView.m in Sources */,
+				34E4E7A12022BED6003F0D56 /* ZKPhotoView.m in Sources */,
 				34CACF332005B30C00DB176F /* CtSheetView.m in Sources */,
 				34F3E74F1FFDEA5C00751B28 /* ZJBLTabbar.m in Sources */,
 				34E0B64C201750E700405483 /* PayTableViewCell.m in Sources */,
@@ -1787,6 +1844,7 @@
 				34F3E7641FFDEDEA00751B28 /* UIColor+JGHexColor.m in Sources */,
 				34EC25C620032D1400A6987C /* ContentTableViewCell.m in Sources */,
 				34450A16200DC9390022FBE1 /* XLRefreshHeader.m in Sources */,
+				34E4E79F2022BED6003F0D56 /* ZKPhotoBrowser.m in Sources */,
 				34250D032004F09A005B082A /* HotelAddressTableViewCell.m in Sources */,
 				34DB836B200F0B8E00BE8604 /* ITTAFQueryStringPair.m in Sources */,
 				34250CEF2004D247005B082A /* SearchResultView.m in Sources */,
@@ -1794,12 +1852,14 @@
 				34250CA420046528005B082A /* CTAssembleRequest+PPAdd.m in Sources */,
 				341C62D420077A9A00FC4EEB /* HotelAdertisment.m in Sources */,
 				34250C9920046528005B082A /* SBJsonStreamParserAccumulator.m in Sources */,
+				34E4E79D2022BED6003F0D56 /* ZKPhotoProgressView.m in Sources */,
 				34250C9820046528005B082A /* SBJsonStreamParser.m in Sources */,
 				34250C4320045BDB005B082A /* SuPhotoAblumList.m in Sources */,
 				34250CB62004AF5A005B082A /* SearchResultTableViewCell.m in Sources */,
 				34450A1C200E169F0022FBE1 /* CustomPickerView.m in Sources */,
 				34250BE72004512E005B082A /* UploadImageCollectionViewCell.m in Sources */,
 				34EC25DC20036A3D00A6987C /* MyFootsViewController.m in Sources */,
+				34E4E7A02022BED6003F0D56 /* ZKPhotoToolbar.m in Sources */,
 				34250D072004F09A005B082A /* HotelCommentTableViewCell.m in Sources */,
 				34DB836E200F0B8E00BE8604 /* NSString+ITTAdditions.m in Sources */,
 				34EC25DF20036B6900A6987C /* SCTableViewCell.m in Sources */,
@@ -1817,6 +1877,7 @@
 				34250CA020046528005B082A /* SBJsonUTF8Stream.m in Sources */,
 				34F3E7451FFDE9C400751B28 /* ZJBLCustomBaseNavController.m in Sources */,
 				341C62D92007829A00FC4EEB /* HotelModifyViewController.m in Sources */,
+				34E4E79E2022BED6003F0D56 /* ZKPhoto.m in Sources */,
 				34250C4120045BDB005B082A /* UIView+SuAnimation.m in Sources */,
 				34F3E7EB1FFE25C900751B28 /* LeftTableViewCell.m in Sources */,
 				34E0B6A820175C4A00405483 /* APAuthInfo.m in Sources */,
@@ -1837,6 +1898,7 @@
 				34F3E7F81FFF5D9200751B28 /* HomeBannerView.m in Sources */,
 				34F3E7651FFDEDEA00751B28 /* UIImage+JGColor.m in Sources */,
 				34250CB320049D26005B082A /* SearchItemModel.m in Sources */,
+				34E4E79A2022BED6003F0D56 /* SDWebImageManager+ZK.m in Sources */,
 				34F3E7F21FFF46D900751B28 /* YFAnimationCostum.m in Sources */,
 				34250CA620046528005B082A /* PPNetworkCache.m in Sources */,
 				34EC25C92003328400A6987C /* ContentCellModel.m in Sources */,

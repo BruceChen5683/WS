@@ -17,12 +17,16 @@
 #import "OpenInfo.h"
 #import <UIImageView+WebCache.h>
 
-@interface HotelDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "HomeBannerView.h"
+#import "ZKPhotoBrowser.h"
+#import <SDCycleScrollView/SDCollectionViewCell.h>
+
+@interface HotelDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 {
     BOOL isCollect;
 }
 @property (nonatomic, strong) UITableView *tableview;
-@property (nonatomic, strong) UIImageView *introImg;
+@property (nonatomic, strong) HomeBannerView *introImg;
 
 @property (nonatomic, strong) NSMutableArray *hotArray;
 
@@ -88,13 +92,29 @@
     return _tableview;
 }
 
-- (UIImageView *)introImg {
-    if (!_introImg) {
-        _introImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
-    }
-    _introImg.userInteractionEnabled = true;
-    [_introImg sd_setImageWithURL:[NSURL URLWithString:self.buildModel.logoUrl] placeholderImage:[UIImage imageNamed:@"listDefault2"]];
+- (NSMutableArray *)convertedImag:(NSArray *)imgs {
+    NSMutableArray *result = [NSMutableArray array];
     
+    for (NSInteger i=0; i<imgs.count; i++) {
+        NSString * str = imgs[i]? imgs[i]:@"";
+        if (![str hasPrefix:@"http"]) {
+            str = [BaseImgUrl stringByAppendingString:str];
+        }
+        [result addObject:str];
+    }
+    return result;
+}
+
+- (HomeBannerView *)introImg {
+    if (!_introImg) {
+        _introImg = [[HomeBannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
+        _introImg.delegate = self;
+    }
+    
+    //_introImg.userInteractionEnabled = true;
+    //TODO: chuli images
+    //_introImg.imageURLStringsGroup = [self convertedImag:self.buildModel.images];
+    _introImg.placeholderImage = [UIImage imageNamed:@"listDefault2"];
     UIButton *btnBack = [UIButton buttonWithType:UIButtonTypeCustom];
     btnBack.frame = CGRectMake(0, 20, 44, 44);
     [btnBack setImage:[UIImage imageNamed:@"jdgb1_return2"] forState:UIControlStateNormal];
@@ -349,9 +369,9 @@
             NSDictionary *data = dic[@"data"];
             [self.buildModel setValuesForKeysWithDictionary:data];
         }
+        self.introImg.imageURLStringsGroup = [self convertedImag:self.buildModel.images];
         [strongSelf.tableview reloadData];
         [strongSelf checkCollectOrNot];
-
     } failure:^(NSError *error) {
         
     }];
@@ -394,6 +414,14 @@
     NSDictionary *dic = @{ITEMIDKEY:[NSString stringWithFormat:@"%@",self.buildModel.cID],
                           ITEMNameKEY:self.buildModel.name? self.buildModel.name:@""};
     [[OpenInfo shared] addToScanned:dic];
+}
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
+
+    UICollectionView *collection = [cycleScrollView valueForKey:@"mainView"];
+    NSIndexPath *idx = [NSIndexPath indexPathForRow:index inSection:0];
+    SDCollectionViewCell *cell = (SDCollectionViewCell *)[collection cellForItemAtIndexPath:idx];
+    [ZKPhotoBrowser showWithImageUrls:[self convertedImag:self.buildModel.images] currentPhotoIndex:index sourceSuperView:cell.imageView];
 }
 
 @end

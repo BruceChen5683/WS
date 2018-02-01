@@ -42,4 +42,5 @@
 @property(nonatomic, copy) NSString *type;
 @property(nonatomic, copy) NSNumber *viewNum;
 
+@property(nonatomic, strong) NSArray *images;
 @end
