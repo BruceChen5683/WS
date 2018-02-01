@@ -147,7 +147,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.searchTxtField.text = self.historyDataSource[indexPath.row];
+    
+    if (self.searchView) {
+        self.searchView.sortView.recordLeft = nil;
+        self.searchView.sortView.recordRight = nil;
+        self.searchView.sortView.selectIndex = 0;
+    }
+    
     [self clickSearch:nil];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
