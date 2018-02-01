@@ -114,6 +114,7 @@
     if (self.cellClickBlock) {
         self.cellClickBlock(m);
     }
+
 }
 
 #pragma mark - set & get
