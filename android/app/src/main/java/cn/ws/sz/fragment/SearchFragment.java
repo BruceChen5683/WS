@@ -135,6 +135,15 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
         gson = new Gson();
         adapter = new BusinessItemAdapter(getActivity(),data);
         listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent();
+				intent.putExtra(Constant.KEY_EXTRA_MERCHANT_ID,data.get(position).getId());
+				intent.setClass(getActivity(), BusinessDetailActivity.class);
+				startActivity(intent);
+			}
+		});
 //        loadData();
 
         rlClassify = (RelativeLayout) view.findViewById(R.id.rlClassify);
