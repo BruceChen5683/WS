@@ -332,7 +332,7 @@
 */
 
 - (void)requireSimliar {
-    NSString *urlstr = [BaseUrl stringByAppendingString:[NSString stringWithFormat:@"merchant/getHotList/%@",[OpenInfo shared].currentArea.aID]];
+    NSString *urlstr = [BaseUrl stringByAppendingString:[NSString stringWithFormat:@"merchant/getHotList/%@",[OpenInfo choosedId]]];
     CTURLModel *model = [CTURLModel initWithUrl:urlstr params:nil];
     __weak typeof(self) weakSelf = self;
     [WSBaseRequest GET:model success:^(id responseObject) {

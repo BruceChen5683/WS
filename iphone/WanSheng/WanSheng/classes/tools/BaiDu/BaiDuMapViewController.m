@@ -10,7 +10,10 @@
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 
-@interface BaiDuMapViewController () <BMKMapViewDelegate, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate>
+@interface BaiDuMapViewController () <BMKMapViewDelegate, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate> {
+    
+    MBProgressHUD *hud;
+}
 
 @property (nonatomic, strong) IBOutlet BMKMapView *mapView;
 
@@ -133,7 +136,6 @@
     option.reverseGeoPoint = pt;
     BOOL flag = [self.geoSearch reverseGeoCode:option];
     if (flag) {
-        
     }
     NSLog(@"搜索位置");
 }
@@ -173,6 +175,7 @@
     CGPoint touchPoint = self.imgView.center;
     CLLocationCoordinate2D touchMapCoordinate =
     [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];//这里touchMapCoordinate就是该点的经纬度了
+    [hud hideAnimated:YES];
     NSLog(@"touching %f,%f",touchMapCoordinate.latitude,touchMapCoordinate.longitude);
 //    NSArray *annotationArr = mapView.annotations;
 //    [mapView removeAnnotations:annotationArr];
@@ -252,6 +255,7 @@
 
 - (void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate {
     NSLog(@"点中底图空白处会回调此接口");
+    hud = [WSMessageAlert showMessage:@"获取经纬度中" nohide:YES];
     [mapView setCenterCoordinate:coordinate animated:YES];
     return;
     /*

@@ -276,7 +276,7 @@
     ///api/merchant/query 搜索
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
-    [params setValue:[NSString stringWithFormat:@"%@",[OpenInfo shared].currentArea.aID] forKey:@"region"];
+    [params setValue:[NSString stringWithFormat:@"%@",[OpenInfo choosedId]] forKey:@"region"];
     [params setValue:self.searchTxtField.text forKey:@"queryText"];
     //需要加种类筛选 TODO
     if (self.filterModel) {
