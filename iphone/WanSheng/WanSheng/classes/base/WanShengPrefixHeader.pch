@@ -21,8 +21,8 @@
 #define PPLog(...)
 #endif
 
-#define BaseUrl @"http://39.106.208.193:8080/ws/api/"
-#define BaseImgUrl @"http://39.106.208.193:8080/ws/"
+#define BaseUrl @"http://118.31.0.121:8080/ws/api/"
+#define BaseImgUrl @"http://118.31.0.121:8080/ws/"
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 

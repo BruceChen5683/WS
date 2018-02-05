@@ -136,7 +136,8 @@
 - (void)reqSellerList:(NSNumber *)itemId page:(long)page{
     // api/merchant/getListByCategory/17/1/110101 该成这个 商户列表
     ///api/merchant/getListByCategory/17/1/110101/1  最后这个1就是按浏览量排序 如果不用这个排序就写0
-    NSString *str = [NSString stringWithFormat:@"%@merchant/getListByCategory/%@/%ld/%@/0",BaseUrl,itemId,page,[OpenInfo shared].currentArea.aID];
+    NSString *urlInterface = [OpenInfo ItsCity:[OpenInfo choosedId]]? @"merchant/getLists":@"merchant/getListByCategory";
+    NSString *str = [NSString stringWithFormat:@"%@%@/%@/%ld/%@/0",BaseUrl,urlInterface,itemId,page,[OpenInfo choosedId]];
     CTURLModel *model = [CTURLModel initWithUrl:str params:nil];
     __weak typeof(self) weakSelf = self;
     [WSBaseRequest GET:model success:^(id responseObject) {

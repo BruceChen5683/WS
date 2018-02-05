@@ -39,4 +39,8 @@
 
 - (NSArray *)deleteDicInScanned:(NSDictionary *)dic;
 
++ (BOOL)ItsCity:(NSNumber *)areaID;
+
++ (NSNumber *)choosedId;
+
 @end

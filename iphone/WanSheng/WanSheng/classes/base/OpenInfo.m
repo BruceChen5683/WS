@@ -118,4 +118,24 @@
     [userDefault synchronize];
     return arr;
 }
+
++ (BOOL)ItsCity:(NSNumber *)areaID {
+    
+    BOOL reslut = NO;
+    
+    if (areaID.longLongValue == (areaID.longLongValue / 100 ) * 100) {
+        reslut = YES;
+    }
+    
+    return reslut;
+}
+
+
++ (NSNumber *)choosedId {
+    if ([OpenInfo shared].currentArea) {
+        return [OpenInfo shared].currentArea.aID;
+    }
+    return [OpenInfo shared].currentCity.cId;
+}
+
 @end
