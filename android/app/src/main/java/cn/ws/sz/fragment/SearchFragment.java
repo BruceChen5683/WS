@@ -65,6 +65,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
     private int pageId = 0;//页码
     private Gson gson;
 
+    private int firstId = 1;
     private int areaId = 110101;//区域
     private boolean bLoadMore = false;
 
@@ -219,7 +220,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                secondCategroy = 17;
+                Log.d(TAG, "onItemClick: "+firstId);
+                if(position == 0){
+                    secondCategroy = firstId;
+                }else {
+                    secondCategroy = DataHelper.getInstance().getSecondCategroyMap().get(firstId).get(position-1).getId();
+                }
+//                secondCategroy = 17;
                 Log.d(TAG, "onItemClick: secondCategroy "+secondCategroy);
                 pageId = 1;
                 bLoadMore = false;
@@ -367,8 +374,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
         });
 
 
-        classifyFirstLV.setSelection(2);
-        firstAdapter.setSelectedPosition(2);
+        classifyFirstLV.setSelection(firstCategroy);
+        firstAdapter.setSelectedPosition(firstCategroy);
         firstAdapter.notifyDataSetChanged();
 
 
@@ -383,8 +390,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                firstId = DataHelper.getInstance().getFirstCategroyList().get(position).getId();
+
                 firstAdapter.setSelectedPosition(position);
                 firstAdapter.notifyDataSetChanged();
+                firstCategroy = position;
                 updateSecondData(position);
             }
         });
@@ -393,7 +403,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
 
     private List<String> getFirstData() {
         List<String> data = new ArrayList<String>();
-        data.add("所有分类");
+//        data.add("所有分类");
         for (int i = 0; i < DataHelper.getInstance().getFirstCategroyList().size(); i++){
             data.add(DataHelper.getInstance().getFirstCategroyList().get(i).getName());
         }
@@ -401,13 +411,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
     }
 
     public void updateSecondData(int id){
-        if(id == 0){
-            return;
-        }
-        tmpList =  DataHelper.getInstance().getSecondCategroyMap().get(DataHelper.getInstance().getFirstCategroyList().get(id-1).getId());
+//        if(id == 0){
+//            return;
+//        }
+        tmpList =  DataHelper.getInstance().getSecondCategroyMap().get(DataHelper.getInstance().getFirstCategroyList().get(id).getId());
         secondData.clear();
         if(tmpList != null){
-            secondData.add("所有"+DataHelper.getInstance().getFirstCategroyList().get(id-1).getName());
+            secondData.add("所有"+DataHelper.getInstance().getFirstCategroyList().get(id).getName());
             for (int i =0;i < tmpList.size();i++){
                 secondData.add(tmpList.get(i).getName());
             }

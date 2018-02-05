@@ -70,7 +70,7 @@ public class BusinesssItem3Adapter extends BaseAdapter{
         }
         holder.tvCellPhone.setText(getItem(position).getCellphone());
 		String logoUrl = getItem(position).getLogoUrl();
-		if(logoUrl.startsWith("")){
+		if(logoUrl.startsWith("http")){
 			CommonUtils.setImageView(logoUrl,holder.imageView);
 		}else {
 			CommonUtils.setImageView(Constant.BASEURL+logoUrl,holder.imageView);

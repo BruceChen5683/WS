@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.mob.sdk'
 android {
-    signingConfigs {
-        config {
-            keyAlias 'app'
-            keyPassword '123456'
-            storeFile file('C:/Users/BattleCall/wanshang.jks')
-            storePassword '123456'
-        }
-    }
+//    signingConfigs {
+//        config {
+//            keyAlias 'app'
+//            keyPassword '123456'
+//            storeFile file('C:/Users/BattleCall/wanshang.jks')
+//            storePassword '123456'
+//        }
+//    }
     compileSdkVersion 24
     buildToolsVersion "25.0.2"
 //    //配置keystore签名
@@ -33,14 +33,14 @@ android {
             minifyEnabled false
 //            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+//            signingConfig signingConfigs.config
         }
 //        debug {
 //            signingConfig signingConfigs.release
 //        }
-        debug {
-            signingConfig signingConfigs.config
-        }
+//        debug {
+//            signingConfig signingConfigs.config
+//        }
     }
     sourceSets {
         main {
