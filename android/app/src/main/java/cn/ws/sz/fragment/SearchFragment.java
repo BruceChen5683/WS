@@ -63,7 +63,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
     private int firstCategroy = 0;
     private int secondCategroy = 0;
     private int pageId = 0;//页码
-    private int region = 110101;//区域
     private Gson gson;
 
     private int areaId = 110101;//区域
@@ -125,10 +124,19 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        areaId = Integer.valueOf( DataHelper.getInstance().getAreaId());
+
         layoutInflater = inflater;
         View view =  inflater.inflate(R.layout.fragment_search, container, false);
         initView(view);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        areaId = Integer.valueOf( DataHelper.getInstance().getAreaId());
     }
 
     private void initView(View view) {
@@ -408,7 +416,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
     }
 
     private void loadData() {
-        quertyMap.put("region",String.valueOf(region));
+        Log.d(TAG, "loadData: "+areaId);
+        quertyMap.put("region",String.valueOf(areaId));
         quertyMap.put("queryText",queryText);
             VolleyRequestUtil.RequestPost(getActivity(),
                     Constant.URL_QUERY_BUSINESS,

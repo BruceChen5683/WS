@@ -215,7 +215,8 @@ public class PickCityActivity extends AppCompatActivity implements SearchFragmen
 	@Override
 	protected void onPause() {
 		super.onPause();
-		DataHelper.getInstance().setCity(gpsCity.get(0).getName());
+        Log.d(TAG, "onPause: "+areaCode);
+        DataHelper.getInstance().setCity(gpsCity.get(0).getName());
 		DataHelper.getInstance().setAreaId(areaCode);
 	}
 
