@@ -292,16 +292,23 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
     }
     private void loadData(final boolean loadMore,final int mSecondCategroy,final int mPageId,final int mAreaId) {
 
-        Log.d(TAG, "loadData: "+Constant.URL_BUSINESS_LIST + mSecondCategroy + "/" + mPageId + "/" + mAreaId + "/"+0);
-        VolleyRequestUtil.RequestGet(getActivity(),
-                Constant.URL_BUSINESS_LIST + mSecondCategroy + "/" + mPageId + "/" + mAreaId + "/"+0,
-                Constant.TAG_BUSINESS_LIST_2,//商家列表tag
+//        Log.d(TAG, "loadData: "+Constant.URL_BUSINESS_LIST + mSecondCategroy + "/" + mPageId + "/" + mAreaId + "/"+0);
+
+
+        quertyMap.put("pageNo",mPageId+"");
+        quertyMap.put("category",mSecondCategroy+"");
+        Log.d(TAG, "loadData: quertyMap "+quertyMap);
+//        quertyMap.put("region",String.valueOf(areaId));
+//        quertyMap.put("queryText",queryText);
+        VolleyRequestUtil.RequestPost(getActivity(),
+                Constant.URL_QUERY_BUSINESS,
+                Constant.TAG_QUERY_BUSINESS,//商家列表搜索tag
+                quertyMap,
                 new VolleyListenerInterface(getActivity(),
                         VolleyListenerInterface.mListener,
                         VolleyListenerInterface.mErrorListener) {
                     @Override
                     public void onMySuccess(String result) {
-
 
                         Log.d(TAG, "onMySuccess: "+result);
 
@@ -322,6 +329,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
                             pullToRefreshView.onFooterRefreshComplete();
                         }
 
+//                        Log.d(TAG, "onMySuccess: "+ result);
+//                        BusinessStatus status = gson.fromJson(result,BusinessStatus.class);
+//                        data.clear();
+//                        if(status.getData() != null && status.getData().size() > 0){
+//                            data.addAll(status.getData());
+//                        }
+//                        adapter.notifyDataSetChanged();
+//                        changeLayout(TYPE_SEARCH_DONE);
                     }
 
                     @Override
@@ -330,6 +345,46 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
                     }
                 },
                 true);
+
+
+
+//        VolleyRequestUtil.RequestGet(getActivity(),
+//                Constant.URL_BUSINESS_LIST + mSecondCategroy + "/" + mPageId + "/" + mAreaId + "/"+0,
+//                Constant.TAG_BUSINESS_LIST_2,//商家列表tag
+//                new VolleyListenerInterface(getActivity(),
+//                        VolleyListenerInterface.mListener,
+//                        VolleyListenerInterface.mErrorListener) {
+//                    @Override
+//                    public void onMySuccess(String result) {
+//
+//
+//                        Log.d(TAG, "onMySuccess: "+result);
+//
+//                        BusinessStatus status = gson.fromJson(result,BusinessStatus.class);
+//                        if(!loadMore){
+//                            classifySecondDetaildata.clear();
+//                        }
+//                        if(status.getData() != null && status.getData().size() > 0){
+//                            actionDone = true;
+//                            classifySecondDetaildata.addAll(status.getData());
+//                        }else{
+//
+//                        }
+//                        classifySecondDetailAdapter.notifyDataSetChanged();
+//                        if(mPageId <= 1){
+//                            pullToRefreshView.onHeaderRefreshComplete("更新于:"+new Date().toLocaleString());
+//                        }else{
+//                            pullToRefreshView.onFooterRefreshComplete();
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onMyError(VolleyError error) {
+//                        Log.d(TAG, "onMyError: ");
+//                    }
+//                },
+//                true);
     }
 
     private void initRlSort(View view) {
@@ -396,6 +451,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
                 firstAdapter.notifyDataSetChanged();
                 firstCategroy = position;
                 updateSecondData(position);
+                hideSecondGridView(false,0);
             }
         });
 
@@ -427,6 +483,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener,Pul
 
     private void loadData() {
         Log.d(TAG, "loadData: "+areaId);
+        quertyMap.clear();
         quertyMap.put("region",String.valueOf(areaId));
         quertyMap.put("queryText",queryText);
             VolleyRequestUtil.RequestPost(getActivity(),
