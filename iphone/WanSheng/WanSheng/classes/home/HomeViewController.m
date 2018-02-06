@@ -78,6 +78,7 @@
     
     //启动请求和服务
    // [self locationService1];
+    NSLog(@"启动请求和服务--------");
     [self.locationService startUserLocationService];
 
 }
@@ -342,7 +343,7 @@
 - (BMKLocationService *)locationService {
     if (!_locationService) {
         _locationService =  [[BMKLocationService alloc] init];
-        _locationService.desiredAccuracy = 100;
+        _locationService.desiredAccuracy = 300;
         _locationService.delegate = self;
     }
     return _locationService;
@@ -362,14 +363,15 @@
         BMKReverseGeoCodeOption *option = [[BMKReverseGeoCodeOption alloc]init];
         option.reverseGeoPoint = [userLocation location].coordinate;
         [OpenInfo shared].bdLocation2D = [userLocation location].coordinate;
+        NSLog(@"反解析--------");
          [self.geoSearch reverseGeoCode:option];//反解析
         //[self.locationService stopUserLocationService];
     }
 }
 
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
-    //  NSLog(@"当前位置--------%@", result.address);
     if (result.address.length > 0) {
+        NSLog(@"OK--------");
         self.cityLbl.text = [NSString stringWithFormat:@"%@%@",result.addressDetail.city,result.addressDetail.district];
         CityModel *m = [[CityModel alloc] init];
         m.city = result.addressDetail.city;
