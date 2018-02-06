@@ -159,6 +159,11 @@
     tapges.delegate = self;
     [v addGestureRecognizer:tapges];
     [self.view addSubview:v];
+    if ([OpenInfo shared].currentCity) {
+        self.cpCtl.view.frame = CGRectMake(0, 44 + [AdaptFrame ws_top:self.view], ScreenWidth, 500);
+    } else {
+        self.cpCtl.view.frame = CGRectMake(0, 44 + [AdaptFrame ws_top:self.view], ScreenWidth, 456);
+    }
     [v addSubview:self.cpCtl.view];
     
 }
@@ -363,17 +368,18 @@
 }
 
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
-  //  NSLog(@"当前位置--------%@", result.address);
+    //  NSLog(@"当前位置--------%@", result.address);
     if (result.address.length > 0) {
-            self.cityLbl.text = [NSString stringWithFormat:@"%@%@",result.addressDetail.city,result.addressDetail.district];
-            CityModel *m = [[CityModel alloc] init];
-            m.city = result.addressDetail.city;
-            [OpenInfo shared].currentCity = m;
+        self.cityLbl.text = [NSString stringWithFormat:@"%@%@",result.addressDetail.city,result.addressDetail.district];
+        CityModel *m = [[CityModel alloc] init];
+        m.city = result.addressDetail.city;
+        m.cId = [NSNumber numberWithLongLong:(result.addressDetail.adCode.longLongValue / 100)*100];
+        [OpenInfo shared].currentCity = m;
         [OpenInfo shared].cityCode = result.cityCode;
-            AreaModel *area = [[AreaModel alloc] init];
-            area.area = result.addressDetail.district;
-            area.aID = [NSNumber numberWithLongLong:result.addressDetail.adCode.longLongValue];
-            [OpenInfo shared].currentArea = area;
+        AreaModel *area = [[AreaModel alloc] init];
+        area.area = result.addressDetail.district;
+        area.aID = [NSNumber numberWithLongLong:result.addressDetail.adCode.longLongValue];
+        [OpenInfo shared].currentArea = area;
         [self refreshUI];
         
         [self.locationService stopUserLocationService];

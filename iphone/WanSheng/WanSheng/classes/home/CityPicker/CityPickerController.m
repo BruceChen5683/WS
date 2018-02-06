@@ -125,7 +125,11 @@
 #pragma mark - table
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (section == 0) {
+        if (self.locationCity.city.length == 0) {
+            return 0;
+        }
+    }
     return 1;
 }
 
@@ -146,6 +150,15 @@
     return 220;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+        if (section == 0) {
+            if  (self.locationCity.city.length == 0){
+                return 0;
+            }
+    }
+    return 30;
+}
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     CityHeadView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"headView"];
     if (section == 0) {
@@ -156,10 +169,6 @@
         headView.label.text = @"所有城市";
     }
     return headView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 30;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
