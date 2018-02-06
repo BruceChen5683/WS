@@ -107,7 +107,7 @@
     [self.leftTable reloadData];
 
     
-    [self loadRightContents:self.selectIndex];
+    [self loadRightContents:self.recordLeft.cID];
     
     
 }
@@ -222,8 +222,8 @@
                 [self.dataSource addObject:[[CatagoryModel alloc] initWithDic:dic]];
             }
             [self.leftTable reloadData];
-            
-            [self loadRightContents:self.selectIndex];
+            CatagoryModel * m = self.dataSource[self.selectIndex];
+            [self loadRightContents:m.cID];
         }
         
     } failure:^(NSError *error) {
@@ -233,8 +233,8 @@
 }
 
 
-- (void)loadRightContents:(NSInteger)row {
-    NSString *str = [NSString stringWithFormat:@"%@category/list/%ld",BaseUrl,(long)(row+1)];
+- (void)loadRightContents:(NSNumber *)rowItemID {
+    NSString *str = [NSString stringWithFormat:@"%@category/list/%@",BaseUrl,rowItemID];
     CTURLModel *model = [CTURLModel initWithUrl:str params:nil];
     [WSBaseRequest GET:model success:^(id responseObject) {
         NSDictionary *result = (NSDictionary *)responseObject;
@@ -243,6 +243,13 @@
             //success
             NSArray *data = result[@"data"];
             [self.rightDataSource removeAllObjects];
+            //添加全部
+            CatagoryModel *totalM = [[CatagoryModel alloc] init];
+            CatagoryModel *tmpLeft = self.dataSource[rowItemID.integerValue];
+            totalM.cName = [NSString stringWithFormat:@"所有%@",tmpLeft.cName];
+            totalM.cID = rowItemID;
+            [self.rightDataSource addObject:totalM];
+            
             for (NSDictionary *dic in data) {
                 [self.rightDataSource addObject:[[CatagoryModel alloc] initWithDic:dic]];
             }

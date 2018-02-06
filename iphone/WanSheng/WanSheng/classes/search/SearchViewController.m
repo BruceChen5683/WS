@@ -282,7 +282,7 @@
 
     //需要加种类筛选 TODO
     if (self.filterModel) {
-        [params setValue:[NSString stringWithFormat:@"%@",self.filterModel.cID] forKey:@"filter"];
+        [params setValue:[NSString stringWithFormat:@"%@",self.filterModel.cID] forKey:@"category"];
     }
     
     CTURLModel *model = [CTURLModel initWithUrl:[BaseUrl stringByAppendingString:@"merchant/query"] params:params];
@@ -296,7 +296,6 @@
             if (page == 1) {
                 [strongSelf.searchedResultArray removeAllObjects];
             }
-            
             PPLog(@"%@ response:%@",model.description,dic.description);
             
             if ([dic[@"errcode"] integerValue] == 0) {
