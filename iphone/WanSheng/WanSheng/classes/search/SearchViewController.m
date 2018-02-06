@@ -152,6 +152,7 @@
         self.searchView.sortView.recordLeft = nil;
         self.searchView.sortView.recordRight = nil;
         self.searchView.sortView.selectIndex = 0;
+        self.filterModel = nil;
     }
     
     [self clickSearch:nil];
