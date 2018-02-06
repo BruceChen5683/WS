@@ -24,6 +24,10 @@
 #import <BaiduMapAPI_Search/BMKGeocodeSearch.h>
 
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
+{
+    MBProgressHUD *hub;
+    BOOL showHub;
+}
 @property (weak, nonatomic) IBOutlet HomeBannerView *cycleImgsView;
 @property (weak, nonatomic) IBOutlet HomePMDView *cycletxtView;
 
@@ -61,6 +65,8 @@
     self.hotcollection.delegate = self;
     self.hotcollection.dataSource = self;
 
+    showHub = NO;
+    
    // [self refreshHotdataCollection];
     
     self.homeMenu.menuClicked = ^(NSString* name){
@@ -364,14 +370,23 @@
         option.reverseGeoPoint = [userLocation location].coordinate;
         [OpenInfo shared].bdLocation2D = [userLocation location].coordinate;
         NSLog(@"反解析--------");
+        if (!showHub) {
+            showHub = YES;
+            hub = [WSMessageAlert showMessage:@"定位中" nohide:YES];
+        }
          [self.geoSearch reverseGeoCode:option];//反解析
         //[self.locationService stopUserLocationService];
     }
 }
 
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
+
     if (result.address.length > 0) {
         NSLog(@"OK--------");
+        if (showHub) {
+            showHub = NO;
+            [hub hideAnimated:YES];
+        }
         self.cityLbl.text = [NSString stringWithFormat:@"%@%@",result.addressDetail.city,result.addressDetail.district];
         CityModel *m = [[CityModel alloc] init];
         m.city = result.addressDetail.city;

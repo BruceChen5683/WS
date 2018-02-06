@@ -278,6 +278,8 @@
     
     [params setValue:[NSString stringWithFormat:@"%@",[OpenInfo choosedId]] forKey:@"region"];
     [params setValue:self.searchTxtField.text forKey:@"queryText"];
+    [params setValue:[NSString stringWithFormat:@"%ld",(long)page] forKey:@"pageNo"];
+
     //需要加种类筛选 TODO
     if (self.filterModel) {
         [params setValue:[NSString stringWithFormat:@"%@",self.filterModel.cID] forKey:@"filter"];
@@ -291,7 +293,9 @@
         if (isSuccessed) {
             NSString *jsonStr = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
             NSDictionary *dic = [jsonStr JSONValue];
-            [strongSelf.searchedResultArray removeAllObjects];
+            if (page == 1) {
+                [strongSelf.searchedResultArray removeAllObjects];
+            }
             
             PPLog(@"%@ response:%@",model.description,dic.description);
             
