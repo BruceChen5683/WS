@@ -279,13 +279,6 @@
             //success
             NSArray *data = result[@"data"];
             [self.rightDataSource removeAllObjects];
-            //添加全部
-            CatagoryModel *totalM = [[CatagoryModel alloc] init];
-            CatagoryModel *tmpLeft = self.dataSource[listid];
-            totalM.cName = [NSString stringWithFormat:@"所有%@",tmpLeft.cName];
-            totalM.cID = [NSNumber numberWithInteger:listid];
-            [self.rightDataSource addObject:totalM];
-            ///// done
             for (NSDictionary *dic in data) {
                 [self.rightDataSource addObject:[[CatagoryModel alloc] initWithDic:dic]];
             }

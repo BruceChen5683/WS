@@ -23,6 +23,8 @@
     
     [self initialLoad];
     
+    self.hasQB = NO;
+    
     __weak typeof(self) weakSelf = self;
     self.goodview.clickHotelBlock = ^(BuildingDetailModel *m) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -189,6 +191,14 @@
     return 0;
 }
 
+- (void)setHasQB:(BOOL)hasQB {
+    _hasQB = hasQB;
+}
+
+- (void)reloadContents {
+    [self loadReqs];
+}
+
 #pragma mark - lazy load
 
 - (NSMutableArray *)dataSource {
@@ -244,12 +254,14 @@
             NSArray *data = result[@"data"];
             [self.rightDataSource removeAllObjects];
             //添加全部
-            CatagoryModel *totalM = [[CatagoryModel alloc] init];
-            CatagoryModel *tmpLeft = self.dataSource[rowItemID.integerValue];
-            totalM.cName = [NSString stringWithFormat:@"所有%@",tmpLeft.cName];
-            totalM.cID = rowItemID;
-            [self.rightDataSource addObject:totalM];
-            
+            if (self.hasQB) {
+                CatagoryModel *totalM = [[CatagoryModel alloc] init];
+                CatagoryModel *tmpLeft = self.dataSource[rowItemID.integerValue];
+                totalM.cName = [NSString stringWithFormat:@"所有%@",tmpLeft.cName];
+                totalM.cID = rowItemID;
+                [self.rightDataSource addObject:totalM];
+            }
+
             for (NSDictionary *dic in data) {
                 [self.rightDataSource addObject:[[CatagoryModel alloc] initWithDic:dic]];
             }

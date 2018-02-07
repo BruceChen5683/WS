@@ -123,6 +123,9 @@
 
     _choosedIndex = choosedIndex;
     
+    self.sortView.hasQB = YES;
+    [self.sortView reloadContents];
+    
     if (_choosedIndex == 1) {
         [self.catagoryBtn setTitleColor:[UIColor colorWithHexCode:@"#d93d45"] forState:UIControlStateNormal];
         [self.sortBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];

@@ -34,4 +34,8 @@
 @property(nonatomic, strong) CatagoryModel *recordLeft;
 @property(nonatomic, strong) CatagoryModel *recordRight;
 
+@property(nonatomic) BOOL hasQB;
+
+- (void)reloadContents;
+
 @end
