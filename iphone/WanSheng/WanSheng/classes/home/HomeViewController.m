@@ -394,7 +394,7 @@
         NSLog(@"反解析--------");
         if (!showHub) {
             showHub = YES;
-            hub = [WSMessageAlert showMessage:@"定位中，请稍等" nohide:YES];
+          //  hub = [WSMessageAlert showMessage:@"定位中，请稍等" nohide:YES];
         }
          [self.geoSearch reverseGeoCode:option];//反解析
         //[self.locationService stopUserLocationService];
@@ -407,7 +407,7 @@
         NSLog(@"OK--------");
         if (showHub) {
             showHub = NO;
-            [hub hideAnimated:YES];
+           // [hub hideAnimated:YES];
         }
         self.cityLbl.text = [NSString stringWithFormat:@"%@%@",result.addressDetail.city,result.addressDetail.district];
         CityModel *m = [[CityModel alloc] init];
