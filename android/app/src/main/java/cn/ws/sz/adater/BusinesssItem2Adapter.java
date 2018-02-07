@@ -67,13 +67,12 @@ public class BusinesssItem2Adapter extends BaseAdapter{
         }else {
             holder.tvBusinessName.setText("商家地址信息不全，请联系客服");
         }
-
-        String url = getItem(position).getLogoUrl();
-        if(url.startsWith("http")){
-			CommonUtils.setImageView(url,holder.imageView);
-		}else {
-			CommonUtils.setImageView(Constant.BASEURL + url,holder.imageView);
+		String[] images = getItem(position).getImages();
+		String url = "";
+		if(images != null && images.length > 0){
+			url = images[0];
 		}
+		CommonUtils.setImageView(url,holder.imageView);
 
         int h = (int) context.getResources().getDimension(R.dimen.dp_130);
 		convertView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h));

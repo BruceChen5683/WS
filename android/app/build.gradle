@@ -9,6 +9,14 @@ android {
 //            storePassword '123456'
 //        }
 //    }
+    signingConfigs {
+        config {
+            keyAlias 'app'
+            keyPassword '123456'
+            storeFile file('/Users/chenjianliang/wanshang.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "25.0.2"
 //    //配置keystore签名
