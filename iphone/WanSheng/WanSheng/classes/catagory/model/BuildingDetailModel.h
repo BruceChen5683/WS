@@ -43,4 +43,7 @@
 @property(nonatomic, copy) NSNumber *viewNum;
 
 @property(nonatomic, strong) NSArray *images;
+
+- (NSString *)firstLogoUrl;
+
 @end

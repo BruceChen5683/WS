@@ -56,7 +56,7 @@
     BuildingDetailModel *m = self.hotelDataSource[indexPath.row];
     cell.nameLbl.text = m.name;
     cell.phoneLbl.text = m.phone;
-    [cell.imgV downImageWithUrl:m.logoUrl];
+    [cell.imgV downImageWithUrl:[m firstLogoUrl]];
     cell.addressLbl.text = m.address;
     return cell;
 }

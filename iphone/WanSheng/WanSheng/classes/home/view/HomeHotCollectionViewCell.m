@@ -11,7 +11,7 @@
 @implementation HomeHotCollectionViewCell
 
 - (void)loadContents:(BuildingDetailModel *)m {
-    [_imgView downImageWithUrl:m.logoUrl];
+    [_imgView downImageWithUrl:[m firstLogoUrl]];
     _nameLbl.text = m.name;
 }
 

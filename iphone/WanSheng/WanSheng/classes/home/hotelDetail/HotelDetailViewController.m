@@ -314,10 +314,12 @@
     if (isCollect) {
         isCollect = !isCollect;
         [[OpenInfo shared] deleteDicInCollect:dic];
+        [WSMessageAlert showMessage:@"已取消收藏"];
     }
     else {
         isCollect = !isCollect;
         [[OpenInfo shared] addToCollect:dic];
+        [WSMessageAlert showMessage:@"收藏成功"];
     }
     [self checkCollectOrNot];
 }

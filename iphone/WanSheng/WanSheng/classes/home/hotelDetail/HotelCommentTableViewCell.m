@@ -24,7 +24,7 @@
 
 
 - (void)loadContents:(BuildingDetailModel *)m {
-    [_hotelImg sd_setImageWithURL:[NSURL URLWithString:m.logoUrl] placeholderImage:[UIImage imageNamed:@"listDefault2"]];
+    [_hotelImg sd_setImageWithURL:[NSURL URLWithString:[m firstLogoUrl]] placeholderImage:[UIImage imageNamed:@"listDefault2"]];
     _hotelName.text = m.name;
     _phone.text = m.phone;
     _address.text = m.address;

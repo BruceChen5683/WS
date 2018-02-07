@@ -29,4 +29,26 @@
     return _logoUrl;
 }
 
+- (NSString *)firstLogoUrl {
+    NSString *result = nil;
+    
+    if (self.images.count > 0) {
+        NSString *tmpUrl = self.images[0];
+        if (![tmpUrl hasPrefix:@"http"]) {
+            tmpUrl = [BaseImgUrl stringByAppendingString:tmpUrl];
+        }
+        result = tmpUrl;
+    }
+    else {
+        result = self.logoUrl;
+        if (result.length == 0) {
+            return result;
+        }
+        if (![result hasPrefix:@"http"]) {
+            result = [BaseImgUrl stringByAppendingString:self.logoUrl];
+        }
+    }
+    return result;
+}
+
 @end

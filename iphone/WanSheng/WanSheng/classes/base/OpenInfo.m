@@ -75,7 +75,7 @@
 
 - (NSArray *)addToScanned:(NSDictionary *)dic {
     
-    NSArray *data = [self collectArray];
+    NSArray *data = [self scannedArray];
     
     NSMutableArray *arr = [NSMutableArray array];
     if (data.count > 0) {
