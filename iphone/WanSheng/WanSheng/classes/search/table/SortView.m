@@ -256,7 +256,7 @@
             //添加全部
             if (self.hasQB) {
                 CatagoryModel *totalM = [[CatagoryModel alloc] init];
-                CatagoryModel *tmpLeft = self.dataSource[rowItemID.integerValue];
+                CatagoryModel *tmpLeft = self.dataSource[self.selectIndex];
                 totalM.cName = [NSString stringWithFormat:@"所有%@",tmpLeft.cName];
                 totalM.cID = rowItemID;
                 [self.rightDataSource addObject:totalM];
