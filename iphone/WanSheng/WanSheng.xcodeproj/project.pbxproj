@@ -123,6 +123,7 @@
 		3493BA5C200C69E400963C3E /* OpenInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3493BA5B200C69E400963C3E /* OpenInfo.m */; };
 		34AC7A38200873EC00E45568 /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AC7A37200873EC00E45568 /* SuccessViewController.m */; };
 		34B677C920106B180046821B /* listDefault2.png in Resources */ = {isa = PBXBuildFile; fileRef = 34B677C820106B170046821B /* listDefault2.png */; };
+		34C1A8DD202B1B770076C931 /* WSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C1A8DC202B1B770076C931 /* WSWebViewController.m */; };
 		34CACF332005B30C00DB176F /* CtSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CACF322005B30C00DB176F /* CtSheetView.m */; };
 		34CACF362005B50B00DB176F /* LookMyRecommendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CACF352005B50B00DB176F /* LookMyRecommendsViewController.m */; };
 		34CACF392005BEC900DB176F /* WSMessageAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CACF382005BEC900DB176F /* WSMessageAlert.m */; };
@@ -427,6 +428,8 @@
 		34AC7A36200873EC00E45568 /* SuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
 		34AC7A37200873EC00E45568 /* SuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
 		34B677C820106B170046821B /* listDefault2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listDefault2.png; sourceTree = "<group>"; };
+		34C1A8DB202B1B770076C931 /* WSWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WSWebViewController.h; sourceTree = "<group>"; };
+		34C1A8DC202B1B770076C931 /* WSWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSWebViewController.m; sourceTree = "<group>"; };
 		34CACF312005B30C00DB176F /* CtSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CtSheetView.h; sourceTree = "<group>"; };
 		34CACF322005B30C00DB176F /* CtSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CtSheetView.m; sourceTree = "<group>"; };
 		34CACF342005B50B00DB176F /* LookMyRecommendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LookMyRecommendsViewController.h; sourceTree = "<group>"; };
@@ -1138,6 +1141,8 @@
 				34F3E7FD1FFF604C00751B28 /* HomeMenuCollectionViewCell.m */,
 				3443B6171FFDD1D3002E3C0A /* HomeViewController.h */,
 				3443B6181FFDD1D3002E3C0A /* HomeViewController.m */,
+				34C1A8DB202B1B770076C931 /* WSWebViewController.h */,
+				34C1A8DC202B1B770076C931 /* WSWebViewController.m */,
 				34F3E7E61FFE182300751B28 /* HomeStoryboard.storyboard */,
 			);
 			path = home;
@@ -1882,6 +1887,7 @@
 				34F3E7EB1FFE25C900751B28 /* LeftTableViewCell.m in Sources */,
 				34E0B6A820175C4A00405483 /* APAuthInfo.m in Sources */,
 				341C62CB2007746400FC4EEB /* HotCityTableViewCell.m in Sources */,
+				34C1A8DD202B1B770076C931 /* WSWebViewController.m in Sources */,
 				34450A13200DC9390022FBE1 /* XLRefreshAnimationLayer.m in Sources */,
 				34F3E7461FFDE9C400751B28 /* ZJBLNavigationController.m in Sources */,
 				34250CBA2004CD10005B082A /* ActiveImageView.m in Sources */,

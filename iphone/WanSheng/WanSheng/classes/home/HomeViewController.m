@@ -23,6 +23,9 @@
 #import <BaiduMapAPI_Location/BMKLocationService.h>
 #import <BaiduMapAPI_Search/BMKGeocodeSearch.h>
 
+
+#import "WSWebViewController.h"
+
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
     MBProgressHUD *hub;
@@ -42,11 +45,14 @@
 
 @property (strong, nonatomic) CityPickerController *cpCtl;
 
+@property (nonatomic, strong)   NSMutableArray *urlArray;
 
 //baidu
 @property (nonatomic, strong) BMKLocationService *locationService;
 
 @property (nonatomic, strong) BMKGeoCodeSearch *geoSearch;
+
+
 
 
 @end
@@ -224,6 +230,13 @@
     return [str stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
+- (NSMutableArray *)urlArray {
+    if (!_urlArray) {
+        _urlArray = [NSMutableArray array];
+    }
+    return _urlArray;
+}
+
 #pragma mark -requests
 
 - (void)locationService1 {
@@ -288,17 +301,19 @@
         
         NSDictionary *dic = (NSDictionary *)responseObject;
 
-        NSMutableArray *urlArray = [NSMutableArray array];
+        [self.urlArray removeAllObjects];
+        NSMutableArray *urlsArr = [NSMutableArray array];
         if ([dic[@"errcode"] integerValue]  == 0) {
             NSArray *data = dic[@"data"];
             for (NSDictionary *d in data) {
                 if ([d[@"bannerUrl"] length] > 0) {
-                    [urlArray addObject:d[@"bannerUrl"]];
+                    [urlsArr addObject:d[@"bannerUrl"]];
+                    [self.urlArray addObject:d];
                 }
             }
         }
         strongSelf.cycleImgsView.placeholderImage = [UIImage imageNamed:@"listDefault"];
-        strongSelf.cycleImgsView.imageURLStringsGroup = urlArray;
+        strongSelf.cycleImgsView.imageURLStringsGroup = urlsArr;
         strongSelf.cycleImgsView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         strongSelf.cycleImgsView.backgroundColor = [UIColor whiteColor];
     } failure:^(NSError *error) {
@@ -340,7 +355,14 @@
 #pragma mark cycle img delegate
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
-    
+    NSDictionary *dic = self.urlArray[index];
+    NSString *redictUrl = dic[@"redictUrl"];
+    if (redictUrl.length > 0
+        &&([redictUrl hasPrefix:@"http://"])) {
+        WSWebViewController *web = [[UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"webCtl"];
+        web.urlStr = redictUrl;
+        [self.navigationController pushViewController:web animated:YES];
+    }
 }
 
 
@@ -372,7 +394,7 @@
         NSLog(@"反解析--------");
         if (!showHub) {
             showHub = YES;
-            hub = [WSMessageAlert showMessage:@"定位中" nohide:YES];
+            hub = [WSMessageAlert showMessage:@"定位中，请稍等" nohide:YES];
         }
          [self.geoSearch reverseGeoCode:option];//反解析
         //[self.locationService stopUserLocationService];
