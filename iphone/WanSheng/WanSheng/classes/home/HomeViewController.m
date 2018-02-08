@@ -91,8 +91,11 @@
     //启动请求和服务
    // [self locationService1];
     NSLog(@"启动请求和服务--------");
-    [self.locationService startUserLocationService];
-
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        [self useDefaultCity];
+    } else {
+        [self.locationService startUserLocationService];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -411,7 +414,16 @@
             showHub = NO;
            // [hub hideAnimated:YES];
         }
+        
         if (![self.cityLbl.text isEqualToString:@"定位中"]) {
+            return ;
+        }
+        
+        PPLog(@"hello this is %@",result.addressDetail.city);
+
+        if (![self IsChinese:result.addressDetail.city]) {
+            [self useDefaultCity];
+            [self.locationService stopUserLocationService];
             return ;
         }
         self.cityLbl.text = [NSString stringWithFormat:@"%@%@",result.addressDetail.city,result.addressDetail.district];
@@ -431,4 +443,23 @@
         NSLog(@"定位错误，重新定位");
     }
 }
+
+- (BOOL)IsChinese:(NSString *)str {
+    for(int i=0; i< [str length];i++){
+        int a = [str characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff){return YES;}
+    }
+    return NO;
+}
+
+- (void)useDefaultCity {
+    self.cityLbl.text = @"北京市";
+    CityModel *m = [[CityModel alloc] init];
+    m.city = @"北京市";
+    m.cId = @(110100);
+    [OpenInfo shared].currentCity = m;
+    [OpenInfo shared].currentArea = nil;
+    [self refreshUI];
+}
+
 @end
