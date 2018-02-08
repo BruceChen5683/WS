@@ -17,7 +17,8 @@ xxxsecondId   二级分类id
 xxxpageId     多页数据，第一几页 e.g. 1,2,...,10
 xxxareaId     区域id
 新的
-获取商户列表  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId/0
+县级区域 获取商户列表  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId/0
+市级区域 获取商户列表  /api/merchant/getLists/xxxsecondId/xxxpageId/xxxareaId/0
 ***************************************************************************
 
 
