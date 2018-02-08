@@ -25,7 +25,7 @@
     _nameLbl.text = m.name;
     _addressLbl.text = m.address;
     _phoneLbl.text = m.phone;
-    [_imgView downImageWithUrl:[m firstLogoUrl]];
+    [_imgView downImageWithUrl:[m logoUrl]];
     _goldImgView.hidden = [m.type isEqualToString:@"normal"];
 }
 

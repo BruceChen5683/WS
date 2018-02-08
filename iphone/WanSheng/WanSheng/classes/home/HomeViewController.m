@@ -395,6 +395,7 @@
         if (!showHub) {
             showHub = YES;
           //  hub = [WSMessageAlert showMessage:@"定位中，请稍等" nohide:YES];
+            self.cityLbl.text = @"定位中";
         }
          [self.geoSearch reverseGeoCode:option];//反解析
         //[self.locationService stopUserLocationService];
@@ -408,6 +409,9 @@
         if (showHub) {
             showHub = NO;
            // [hub hideAnimated:YES];
+        }
+        if (![self.cityLbl.text isEqualToString:@"定位中"]) {
+            return ;
         }
         self.cityLbl.text = [NSString stringWithFormat:@"%@%@",result.addressDetail.city,result.addressDetail.district];
         CityModel *m = [[CityModel alloc] init];
