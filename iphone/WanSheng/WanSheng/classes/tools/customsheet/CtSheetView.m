@@ -95,9 +95,9 @@
     [containtView addSubview:tipView];
     UIImageView *tipImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_recommend_hint"]];
     tipImg.contentMode = UIViewContentModeScaleAspectFit;
-    tipImg.frame = CGRectMake(15, 5, 20, 20);
+    tipImg.frame = CGRectMake(10, 6, 18, 18);
     [tipView addSubview:tipImg];
-    UILabel *tipText = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, screenwidth-55, 20)];
+    UILabel *tipText = [[UILabel alloc]initWithFrame:CGRectMake(35, 5, screenwidth-35, 20)];
     tipText.text = dic[@"tips"];
     tipText.textColor = UIColorFromRGB(0xff7600);
     tipText.font = [UIFont systemFontOfSize:12];
