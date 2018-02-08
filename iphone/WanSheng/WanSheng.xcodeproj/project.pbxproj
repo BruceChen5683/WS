@@ -2073,8 +2073,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Songli Zhu (G58857AD6G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Songli Zhu (G58857AD6G)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanjing Kemei Information Technology Co.,Ltd. (4K8YC5FWE3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Nanjing Kemei Information Technology Co.,Ltd. (4K8YC5FWE3)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4K8YC5FWE3;
 				ENABLE_BITCODE = NO;
@@ -2109,8 +2109,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wans.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5dec2e4b-79c8-452b-ad64-f31e12a3dc0d";
-				PROVISIONING_PROFILE_SPECIFIER = wanShangDev;
+				PROVISIONING_PROFILE = "38e3bf9c-13d3-4140-91c9-d07f88ee2fec";
+				PROVISIONING_PROFILE_SPECIFIER = szwsDistribution;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2121,8 +2121,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Songli Zhu (G58857AD6G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Songli Zhu (G58857AD6G)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanjing Kemei Information Technology Co.,Ltd. (4K8YC5FWE3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Nanjing Kemei Information Technology Co.,Ltd. (4K8YC5FWE3)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4K8YC5FWE3;
 				ENABLE_BITCODE = NO;
@@ -2157,8 +2157,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wans.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5dec2e4b-79c8-452b-ad64-f31e12a3dc0d";
-				PROVISIONING_PROFILE_SPECIFIER = wanShangDev;
+				PROVISIONING_PROFILE = "38e3bf9c-13d3-4140-91c9-d07f88ee2fec";
+				PROVISIONING_PROFILE_SPECIFIER = szwsDistribution;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
