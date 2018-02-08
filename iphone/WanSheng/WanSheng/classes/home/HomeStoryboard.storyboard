@@ -738,10 +738,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIv-VP-EG6" userLabel="content view">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w3p-7l-NG7">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                    <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w3p-7l-NG7">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </webView>
                                 </subviews>
@@ -762,7 +762,7 @@
                             <constraint firstAttribute="trailing" secondItem="vmY-s7-320" secondAttribute="trailing" id="a1B-hr-3J2"/>
                             <constraint firstItem="EIv-VP-EG6" firstAttribute="top" secondItem="vmY-s7-320" secondAttribute="bottom" id="bZb-Ar-Cop"/>
                             <constraint firstItem="EIv-VP-EG6" firstAttribute="leading" secondItem="eGW-fL-hNJ" secondAttribute="leading" id="cMI-1c-3Fm"/>
-                            <constraint firstAttribute="bottom" secondItem="EIv-VP-EG6" secondAttribute="bottom" constant="49" id="fvo-Fd-XSM"/>
+                            <constraint firstAttribute="bottom" secondItem="EIv-VP-EG6" secondAttribute="bottom" id="fvo-Fd-XSM"/>
                             <constraint firstItem="vmY-s7-320" firstAttribute="top" secondItem="eGW-fL-hNJ" secondAttribute="top" id="wqf-lD-LiM"/>
                         </constraints>
                     </view>
