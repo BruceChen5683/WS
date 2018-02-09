@@ -38,13 +38,16 @@ import cn.ws.sz.bean.CollectHistroyBean;
 import cn.ws.sz.fragment.BannerFragment;
 import cn.ws.sz.utils.CommonUtils;
 import cn.ws.sz.utils.Constant;
+import cn.ws.sz.utils.DataHelper;
 import cn.ws.sz.utils.DeviceUtils;
 import cn.ws.sz.utils.Eyes;
 import cn.ws.sz.utils.SoftKeyBroadManager;
 import cn.ws.sz.utils.SoftKeyBroadManager.SoftKeyboardStateListener;
 import cn.ws.sz.utils.ToastUtil;
+import cn.ws.sz.utils.WSApp;
 import cn.ws.sz.view.ImageLayout;
 import cn.ws.sz.view.ViewFactory;
+import gps.LocationFilter;
 import third.ACache;
 import third.volley.VolleyListenerInterface;
 import third.volley.VolleyRequestUtil;
@@ -65,6 +68,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements View.On
 	private BannerFragment.ImageCycleViewListener imageCycleViewListener;
 	private List<ImageView> views = new ArrayList<ImageView>();
 	String[] images;
+	private RelativeLayout rl_can_gps;
 
     private TextView tvFixedPhone,tvTel;
 	RelativeLayout rlModifierAd;
@@ -120,6 +124,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements View.On
         if(bundle != null){
 			merchantId = bundle.getInt(Constant.KEY_EXTRA_MERCHANT_ID,1);
         }
+		areaId = Integer.valueOf( DataHelper.getInstance().getAreaId());
 
         gson = new Gson();
 
@@ -134,6 +139,12 @@ public class BusinessDetailActivity extends AppCompatActivity implements View.On
         initDialog();
 
     }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		areaId = Integer.valueOf( DataHelper.getInstance().getAreaId());
+	}
 
 	private void loadBusinessData() {
 		VolleyRequestUtil.RequestGet(this,
@@ -225,11 +236,16 @@ public class BusinessDetailActivity extends AppCompatActivity implements View.On
 
     private void initView() {
 
+
+
 		bannerFragment = (BannerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_banner_content);
 
 		if (bannerFragment != null) {// null, Version
 //			bannerFragment.setHeight();
 		}
+
+		rl_can_gps = (RelativeLayout)findViewById(R.id.rl_can_gps);
+		rl_can_gps.setOnClickListener(this);
 
         ivLabel = (ImageView) findViewById(R.id.ivLabel);
 
@@ -325,13 +341,13 @@ public class BusinessDetailActivity extends AppCompatActivity implements View.On
 
             images = businessBean.getImages();
 
-			Log.d("cjl", "BusinessDetailActivity ---------setBusinessBeanToUi:      images "+images);
-
 			views.clear();
 			if(images != null && images.length > 0){
 				views.add(ViewFactory.getImageView(this,images[images.length-1]));
 				for (int i = 0;i < images.length;i++){
-					views.add(ViewFactory.getImageView(this,images[i]));
+                    Log.d(TAG, "setBusinessBeanToUi: images "+images[i]);
+
+                    views.add(ViewFactory.getImageView(this,images[i]));
 				}
 				views.add(ViewFactory.getImageView(this,images[0]));
 			}else {
@@ -345,8 +361,11 @@ public class BusinessDetailActivity extends AppCompatActivity implements View.On
     }
 
     private void loadSimilarData() {
-        VolleyRequestUtil.RequestGet(this,
-                Constant.URL_BUSINESS_LIST + secondCategroy + "/" + pageId + "/" + areaId  + "/"+0,
+		String temp = areaId +"";
+		String url = temp.endsWith("00") ? Constant.URL_BUSINESS_LIST_BY_CITY : Constant.URL_BUSINESS_LIST_BY_AREA;
+		Log.d(TAG, "loadSimilarData: url "+ url);
+		VolleyRequestUtil.RequestGet(this,
+				url + secondCategroy + "/" + pageId + "/" + areaId  + "/"+0,
                 Constant.TAG_BUSINESS_LIST_SIMILAR,//商家列表tag
                 new VolleyListenerInterface(this,
                         VolleyListenerInterface.mListener,
@@ -421,6 +440,23 @@ public class BusinessDetailActivity extends AppCompatActivity implements View.On
                 tel = (String) tvTel.getText();
                 CommonUtils.callByDefault(this,tel);
                 break;
+			case R.id.rl_can_gps:
+				Intent intent1 = new Intent();
+				intent1.setClass(BusinessDetailActivity.this, LocationFilter.class);
+				intent1.putExtra("mode",Constant.DISPLAY_GPS);
+				intent1.putExtra("latitude",businessBean.getLat());
+				intent1.putExtra("longitude",businessBean.getLng());
+                String city = "";
+                String regionId = businessBean.getRegion();
+                if(!regionId.endsWith("00")){
+                    regionId = regionId.substring(0, regionId.length()-2) + "00";
+                }
+                city = WSApp.citys.get(Integer.valueOf(regionId)).getCity();
+                intent1.putExtra("city",city);
+                intent1.putExtra("address",businessBean.getAddress());
+                startActivity(intent1);
+                Log.d(TAG, "onClick: regionId "+regionId+city);
+                break;
             default:
                 break;
         }
@@ -443,9 +479,9 @@ public class BusinessDetailActivity extends AppCompatActivity implements View.On
 				rlModifierAd.setVisibility(View.INVISIBLE);
                 dialogTitle.setText("主营");
 //                tvModifier.setText("修改主营内容");
-//                if(tvTivMainBusiness2 != null && !TextUtils.isEmpty(tvTivMainBusiness2.getText())){
-//                    dialogEt.setText(tvTivMainBusiness2.getText());
-//                }
+                if(tvTivMainBusiness2 != null && !TextUtils.isEmpty(tvTivMainBusiness2.getText())){
+                    dialogEt.setText(tvTivMainBusiness2.getText());
+                }
             }
 
             adDiaglog.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
