@@ -360,7 +360,7 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     //NSDictionary *dic = self.urlArray[index];
    // NSString *redictUrl = dic[@"redictUrl"];
-    NSString *redictUrl = @"http://sz-ws.cn:8080/join.html";
+    NSString *redictUrl = @"http://sz-ws.cn/join.html";
     if (redictUrl.length > 0
         &&([redictUrl hasPrefix:@"http"])) {
         WSWebViewController *web = [[UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"webCtl"];

@@ -91,7 +91,7 @@
         __weak typeof(self) weakSelf = self;
         CtSheetView * ctSheet = [[CtSheetView alloc] initWithMap:@{@"name":@"推  荐  人：",@"nameValue":@"请输入您的名称或称呼",@"number":@"手机号码：",@"numberValue":@"请输入您的手机号码",@"tips":@"好友入驻万商, \“推荐人\”填写你的手机号，您将得到佣金10元。",@"commitName":@"点击推荐"} clickBlock:^(NSString *name, NSString *phone) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf.wechatManager shareUrl:@"www.sz-ws.cn/join.html" title:@"推荐好友加入万商" description:@"好友入驻万商, \“推荐人\”填写你的手机号，您将得到佣金10元。" image:[UIImage imageNamed:@"listDefault2.png"] toScene:(int)WXSceneSession];
+            [strongSelf.wechatManager shareUrl:@"http://sz-ws.cn/join.html" title:@"推荐好友加入万商" description:@"好友入驻万商, \“推荐人\”填写你的手机号，您将得到佣金10元。" image:[UIImage imageNamed:@"listDefault2.png"] toScene:(int)WXSceneSession];
         }];
         [self shareToView:ctSheet];
     }
@@ -105,7 +105,7 @@
         __weak typeof(self) weakSelf = self;
         CtSheetView * ctSheet = [[CtSheetView alloc] initWithMap:@{@"name":@"推  荐  人：",@"nameValue":@"请输入您的名称或称呼",@"number":@"手机号码：",@"numberValue":@"请输入您的手机号码",@"tips":@"推荐好友成为万商代理，服务商家，创造财富",@"commitName":@"点击推荐"} clickBlock:^(NSString *name, NSString *phone) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf.wechatManager shareUrl:@"www.sz-ws.cn/join.html" title:@"推荐好友加入代理" description:@"推荐好友成为万商代理，服务商家，创造财富" image:[UIImage imageNamed:@"listDefault2.png"] toScene:(int)WXSceneSession];
+            [strongSelf.wechatManager shareUrl:@"http://sz-ws.cn/join.html" title:@"推荐好友加入代理" description:@"推荐好友成为万商代理，服务商家，创造财富" image:[UIImage imageNamed:@"listDefault2.png"] toScene:(int)WXSceneSession];
         }];
         [self shareToView:ctSheet];
     }
