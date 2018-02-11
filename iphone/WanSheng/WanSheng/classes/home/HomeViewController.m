@@ -309,8 +309,12 @@
         if ([dic[@"errcode"] integerValue]  == 0) {
             NSArray *data = dic[@"data"];
             for (NSDictionary *d in data) {
-                if ([d[@"bannerUrl"] length] > 0) {
-                    [urlsArr addObject:d[@"bannerUrl"]];
+                NSString *bannerTmpUrl = d[@"bannerUrl"];
+                if ([bannerTmpUrl length] > 0) {
+                    if (![bannerTmpUrl hasPrefix:@"http"]) {
+                        bannerTmpUrl = [BaseImgUrl stringByAppendingString:bannerTmpUrl];
+                    }
+                    [urlsArr addObject:bannerTmpUrl];
                     [self.urlArray addObject:d];
                 }
             }
@@ -325,7 +329,6 @@
     }];
     
 }
-
 
 - (void)refreshHotSeller {
 
@@ -361,12 +364,12 @@
     //NSDictionary *dic = self.urlArray[index];
    // NSString *redictUrl = dic[@"redictUrl"];
     NSString *redictUrl = @"http://sz-ws.cn/join.html";
-    if (redictUrl.length > 0
-        &&([redictUrl hasPrefix:@"http"])) {
+    //if (redictUrl.length > 0
+     //   &&([redictUrl hasPrefix:@"http"])) {
         WSWebViewController *web = [[UIStoryboard storyboardWithName:@"HomeStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"webCtl"];
         web.urlStr = redictUrl;
         [self.navigationController pushViewController:web animated:YES];
-    }
+   // }
 }
 
 
