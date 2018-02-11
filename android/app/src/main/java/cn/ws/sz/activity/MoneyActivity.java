@@ -128,23 +128,7 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
     private StringBuilder imageIdStr = new StringBuilder();
 
     private static final int UPLOAD_PIC_SUCCESS = 200;
-    private Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case UPLOAD_PIC_SUCCESS:
-                    Log.d(TAG, "handleMessage: "+mImageSize);
-                    if(mImageSize == SelectedImages.size()){
-                        addMerchant();
-                    }else {
 
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 
     /*
      *  choose
@@ -185,59 +169,52 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
 	 * */
 	private String orderInfo;
 	private static final int SDK_PAY_FLAG = 1;
-	@SuppressLint("HandlerLeak")
-	private Handler mPayHandler = new Handler() {
-		@SuppressWarnings("unused")
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-				case SDK_PAY_FLAG: {
-					@SuppressWarnings("unchecked")
-					PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-					/**
-					 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
-					 */
-					String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-					String resultStatus = payResult.getResultStatus();
-					// 判断resultStatus 为9000则代表支付成功
-					if (TextUtils.equals(resultStatus, "9000")) {
-						// 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-						Toast.makeText(MoneyActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-					} else {
-						// 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-						Toast.makeText(MoneyActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-					}
-					break;
-				}
-				default:
-					break;
-			}
-		}
-		;
-	};
 
 
 
-
-    private Handler handler = new Handler(){
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-
             switch (msg.what){
-                case MSG_PAY_SUCCESS:
-                    Intent intent = new Intent();
-                    intent.setClass(MoneyActivity.this,AfterPayActivity.class);
-                    startActivity(intent);
+                case UPLOAD_PIC_SUCCESS:
+                    Log.d(TAG, "handleMessage: "+mImageSize);
+                    if(mImageSize == SelectedImages.size()){
+                        ToastUtil.showShort(MoneyActivity.this, "商家图片信息上传成功");
+
+                        addMerchant();
+                    }else {
+                        paramsImg.clear();
+                        // path fileName
+                        paramsImg.put("pic", new String[]{SelectedImages.get(mImageSize).getImagePath(),SelectedImages.get(mImageSize).getImagePath()});
+                        //发起请求
+                        uploadImage(mImageSize,paramsImg);
+                    }
                     break;
-                case MSG_PAY_FAIL:
+                case SDK_PAY_FLAG:
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    /**
+                     对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                     */
+                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                    String resultStatus = payResult.getResultStatus();
+                    // 判断resultStatus 为9000则代表支付成功
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        Toast.makeText(MoneyActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        intent.setClass(MoneyActivity.this,AfterPayActivity.class);
+                        startActivity(intent);
+                    } else {
+                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                        Toast.makeText(MoneyActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 default:
                     break;
             }
         }
     };
-
-    public MoneyActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -448,7 +425,7 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
             	if(windowType == WINDOW_CLASSIFY){
                 	tvSettledClassify2.setText(mCurrentFirstClassify+"-"+mCurrentSecondClassify);
             	}else if(windowType == WINDOW_AREA){
-					tvSettledAddresss2.setText(mCurrentProvince+"-"+mCurrentCity+"-"+mCurrentArea);
+					tvSettledAddresss2.setText(mCurrentProvince+mCurrentCity+mCurrentArea);
 				}
                 mPopupWindow.dismiss();
                 break;
@@ -474,6 +451,7 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
 //                onClickEditTextParent((ViewGroup) v);
                 Intent intent = new Intent();
                 intent.setClass(MoneyActivity.this, LocationFilter.class);
+				intent.putExtra("mode",Constant.SET_GPS);
 				startActivityForResult(intent,CODE_LOCATIONFILTER_ACTIVITY);
                 break;
             case R.id.rlSettledPhone:
@@ -606,14 +584,15 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
 			return;
 		}
         mImageSize = 0;
-        for (int i = 0; i < SelectedImages.size(); i++) {
+//        for (int i = 0; i < SelectedImages.size(); i++) {
 
-            Log.d(TAG, "uploadImage: " + SelectedImages.get(i).getImagePath());
+//            Log.d(TAG, "uploadImage: " + SelectedImages.get(i).getImagePath());
             paramsImg.clear();
-            paramsImg.put("pic", new String[]{SelectedImages.get(i).getImagePath(), SelectedImages.get(i).getImagePath()});
+            // path fileName
+            paramsImg.put("pic", new String[]{SelectedImages.get(0).getImagePath(),SelectedImages.get(0).getImagePath()});
             //发起请求
-            uploadImage(i,paramsImg);
-        }
+            uploadImage(0,paramsImg);
+//        }
     }
 
     private void uploadImage(final int i,final Map<String,String[]> paramsImg){
@@ -638,7 +617,6 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
                         if (status.getErrcode() == 0) {
                             imageIdStr.append(status.getData());
                             imageIdStr.append(",");
-                            ToastUtil.showShort(MoneyActivity.this, "商家图片信息上传成功");
                         } else {
                             ToastUtil.showShort(MoneyActivity.this, "商家图片上传失败");
                         }
@@ -863,11 +841,9 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
 			if(cityLength > 0){
 				if(cityLength > mCurrentCityItem){
 					mCurrentCity = cityBeanList.get(mCurrentCityItem).getCity();
-//				categoryId = secondClassifyDatas.get(mCurrentSecondClassifyItem).getId();
 					cityView.setCurrentItem(mCurrentCityItem);
 				}else {
 					mCurrentCity = cityBeanList.get(cityLength-1).getCity();
-//				categoryId = secondClassifyDatas.get(cityLength-1).getId();
 					cityView.setCurrentItem(cityLength-1);
 				}
 			}else {
@@ -896,12 +872,10 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
 			if(areaLength > mCurrentAreaItem){
 				mCurrentArea = areaBeanList.get(mCurrentAreaItem).getArea();
 				areaId = areaBeanList.get(mCurrentAreaItem).getId();
-//				categoryId = secondClassifyDatas.get(mCurrentSecondClassifyItem).getId();
 				areaView.setCurrentItem(mCurrentAreaItem);
 			}else {
 				mCurrentArea = areaBeanList.get(areaLength-1).getArea();
 				areaId = areaBeanList.get(areaLength-1).getId();
-//				categoryId = secondClassifyDatas.get(cityLength-1).getId();
 				areaView.setCurrentItem(areaLength-1);
 			}
 		}else {
@@ -928,14 +902,17 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
 		if(secondClassifyLenght > 0){
 			if(secondClassifyLenght > mCurrentSecondClassifyItem){
 				mCurrentSecondClassify = secondClassifyDatas.get(mCurrentSecondClassifyItem).getName();
-				categoryId = secondClassifyDatas.get(mCurrentSecondClassifyItem).getId();
+                Log.d(TAG, "updateSecondClassifyDate: 1");
+                categoryId = secondClassifyDatas.get(mCurrentSecondClassifyItem).getId();
 				secondClassifyView.setCurrentItem(mCurrentSecondClassifyItem);
 			}else {
 				mCurrentSecondClassify = secondClassifyDatas.get(secondClassifyLenght-1).getName();
-				categoryId = secondClassifyDatas.get(secondClassifyLenght-1).getId();
+                Log.d(TAG, "updateSecondClassifyDate: 2");
+                categoryId = secondClassifyDatas.get(secondClassifyLenght-1).getId();
 				secondClassifyView.setCurrentItem(secondClassifyLenght-1);
 			}
-		}else {
+            Log.d(TAG, "updateSecondClassifyDate: categoryId "+categoryId);
+        }else {
 			mCurrentSecondClassify = "";
 		}
 	}
@@ -957,6 +934,8 @@ public class MoneyActivity extends AppCompatActivity implements View.OnClickList
         if(wheel == secondClassifyView){
             mCurrentSecondClassify = secondClassifyDatas.get(newValue).getName();
             mCurrentSecondClassifyItem = newValue;
+            categoryId = secondClassifyDatas.get(mCurrentSecondClassifyItem).getId();
+            Log.d(TAG, "onChanged: categoryId "+categoryId);
         }
 
 		if(wheel == provinceView){

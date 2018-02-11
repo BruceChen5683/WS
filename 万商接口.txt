@@ -28,7 +28,7 @@ xxxareaId     区域id
 
 
 关键字查询，获取商户列表  /api/merchant/query
-POST,key---region,queryText
+POST,key---region,queryText,pageNo,category
 
 总推荐查询   /api/merchant/findNum/xxx       xxx手机号
 今日推荐查询 /api/merchant/getReferees/xxx   xxx手机号

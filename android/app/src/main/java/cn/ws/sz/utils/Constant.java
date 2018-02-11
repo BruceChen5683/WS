@@ -7,7 +7,7 @@ import third.ACache;
  */
 
 public class Constant {
-    public static final String BASEURL = "http://118.31.0.121:8080/ws";
+    public static final String BASEURL = "http://api.sz-ws.cn/ws";
 
     public static final int MAX_BUSINESS_PHOTO = 5;
     public static final int MAX_IDCARD_PHOTO = 1;
@@ -29,7 +29,11 @@ public class Constant {
     public static final String URL_AREA = "/api/region/getArea";// +城市id
 
     public static final String URL_AD = "/api/banner/list/";// +areaId  /api/banner/list/110101    110101 是区域id 获取banner图
-    public static final String URL_BUSINESS_LIST = "/api/merchant/getListByCategory/";//  /api/merchant/getListByCategory/0/0/110101 获取商户列表 17是二级分类的id 1是页码
+
+	//俩个接口
+    public static final String URL_BUSINESS_LIST_BY_AREA = "/api/merchant/getListByCategory/";//  /api/merchant/getListByCategory/xxxsecondId/xxxpageId/xxxareaId/0 获取商户列表 17是二级分类的id 1是页码
+	public static final String URL_BUSINESS_LIST_BY_CITY = "/api/merchant/getLists/";
+
     public static final String URL_HOT = "/api/merchant/getHotList/";// + aredId
 
     public static final String URL_DETAIL = "/api/merchant/detail/";// /api/merchant/detail/10
@@ -94,7 +98,7 @@ public class Constant {
     public static final int HOT_BUSINESS_NUM = 2;
 
 
-    public static final String TEST_AD_URL = "http://news.bioon.com/article/6716755.html";
+    public static final String TEST_AD_URL = "http://www.sz-ws.cn/join.html";
 
 
 
@@ -113,5 +117,8 @@ public class Constant {
 	public static final String DIR_WS_CRASH = "WanShangCrash";
 
 	public static final String KEY_EXTRA_MERCHANT_ID = "merchantId";
+
+	public static final int DISPLAY_GPS = 1;
+	public static final int SET_GPS = 2;
 
 }
