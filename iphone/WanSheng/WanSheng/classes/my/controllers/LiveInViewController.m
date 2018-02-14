@@ -31,7 +31,7 @@
 
 #import "SuccessViewController.h"
 
-@interface LiveInViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate>
+@interface LiveInViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,UITextViewDelegate>
 
 @property(nonatomic, strong) NSMutableArray *uploadedImageDataArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *uploadCollectionView;
@@ -100,6 +100,14 @@
     
     self.businessAdvertismentTxtView.layer.borderWidth = 0.5;
     self.businessAdvertismentTxtView.layer.borderColor = [UIColor grayColor].CGColor;
+    
+    self.businessManagedZoneTxtView.delegate = self;
+    self.businessManagedZoneTxtView.tag = 5;
+    
+    self.businessAdvertismentTxtView.delegate  = self;
+    self.businessManagedZoneTxtView.tag = 6;
+
+    
     
     //////sort view
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicktohide:)];
@@ -474,6 +482,31 @@
 
 }
 
+#pragma mark - textview delegate
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    //请输入商家的广告内容，最多100字
+    //请输入商家的主营内容，最多500字
+    if (textView == self.businessManagedZoneTxtView) {
+        if ([textView.text isEqualToString:@"请输入商家的主营内容，最多500字"]) {
+            textView.text = @"";
+        }
+    } else  if (textView == self.businessAdvertismentTxtView)  {
+        if ([textView.text isEqualToString:@"请输入商家的广告内容，最多100字"]) {
+            textView.text = @"";
+        }
+    }
+}
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView == self.businessManagedZoneTxtView) {
+        if ([textView.text isEqualToString:@""]) {
+            textView.text = @"请输入商家的主营内容，最多500字";
+        }
+    }  else  if (textView == self.businessAdvertismentTxtView)  {
+        if ([textView.text isEqualToString:@""]) {
+            textView.text = @"请输入商家的广告内容，最多100字";
+        }
+    }
+}
 
 
 - (void)doAPPay:(CGFloat)money {
@@ -621,5 +654,7 @@
     }
     return resultStr;
 }
+
+
 
 @end
