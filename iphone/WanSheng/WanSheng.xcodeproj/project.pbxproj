@@ -120,6 +120,8 @@
 		34450A16200DC9390022FBE1 /* XLRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 34450A10200DC9390022FBE1 /* XLRefreshHeader.m */; };
 		34450A19200E096F0022FBE1 /* AddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34450A18200E096F0022FBE1 /* AddressPickerView.m */; };
 		34450A1C200E169F0022FBE1 /* CustomPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34450A1B200E169F0022FBE1 /* CustomPickerView.m */; };
+		347C8B9B204417E000F46D5E /* SinglePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 347C8B9A204417DF00F46D5E /* SinglePickerView.m */; };
+		347C8B9E20441A1600F46D5E /* BasePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 347C8B9C20441A1600F46D5E /* BasePickerView.m */; };
 		3493BA5C200C69E400963C3E /* OpenInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3493BA5B200C69E400963C3E /* OpenInfo.m */; };
 		34AC7A38200873EC00E45568 /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AC7A37200873EC00E45568 /* SuccessViewController.m */; };
 		34B677C920106B180046821B /* listDefault2.png in Resources */ = {isa = PBXBuildFile; fileRef = 34B677C820106B170046821B /* listDefault2.png */; };
@@ -423,6 +425,10 @@
 		34450A18200E096F0022FBE1 /* AddressPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressPickerView.m; sourceTree = "<group>"; };
 		34450A1A200E169F0022FBE1 /* CustomPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPickerView.h; sourceTree = "<group>"; };
 		34450A1B200E169F0022FBE1 /* CustomPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPickerView.m; sourceTree = "<group>"; };
+		347C8B99204417DF00F46D5E /* SinglePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePickerView.h; sourceTree = "<group>"; };
+		347C8B9A204417DF00F46D5E /* SinglePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePickerView.m; sourceTree = "<group>"; };
+		347C8B9C20441A1600F46D5E /* BasePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePickerView.m; sourceTree = "<group>"; };
+		347C8B9D20441A1600F46D5E /* BasePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePickerView.h; sourceTree = "<group>"; };
 		3493BA5A200C69E400963C3E /* OpenInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenInfo.h; sourceTree = "<group>"; };
 		3493BA5B200C69E400963C3E /* OpenInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenInfo.m; sourceTree = "<group>"; };
 		34AC7A36200873EC00E45568 /* SuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
@@ -1205,6 +1211,17 @@
 			path = XLRefresh;
 			sourceTree = "<group>";
 		};
+		347C8B98204417DF00F46D5E /* picker */ = {
+			isa = PBXGroup;
+			children = (
+				347C8B9D20441A1600F46D5E /* BasePickerView.h */,
+				347C8B9C20441A1600F46D5E /* BasePickerView.m */,
+				347C8B99204417DF00F46D5E /* SinglePickerView.h */,
+				347C8B9A204417DF00F46D5E /* SinglePickerView.m */,
+			);
+			path = picker;
+			sourceTree = "<group>";
+		};
 		34CACF302005B30C00DB176F /* customsheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1480,6 +1497,7 @@
 		34F3E7701FFE018C00751B28 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				347C8B98204417DF00F46D5E /* picker */,
 				34E4E7892022BED6003F0D56 /* ZKPhotoBrowser */,
 				34E0B64E20175C4A00405483 /* alipay */,
 				34F4E7892011ED2400EE6E72 /* wechatShare */,
@@ -1805,6 +1823,7 @@
 				34DB836C200F0B8E00BE8604 /* ITTBaseModelObject.m in Sources */,
 				341C62C42007746400FC4EEB /* AreaModel.m in Sources */,
 				34F3E7441FFDE9C400751B28 /* ZJBLBaseController.m in Sources */,
+				347C8B9B204417E000F46D5E /* SinglePickerView.m in Sources */,
 				3443B6161FFDD1C7002E3C0A /* MyViewController.m in Sources */,
 				34250C5020045BDB005B082A /* SuMessageTool.m in Sources */,
 				34EC25D6200366E500A6987C /* ContactKFViewController.m in Sources */,
@@ -1886,6 +1905,7 @@
 				34250C4120045BDB005B082A /* UIView+SuAnimation.m in Sources */,
 				34F3E7EB1FFE25C900751B28 /* LeftTableViewCell.m in Sources */,
 				34E0B6A820175C4A00405483 /* APAuthInfo.m in Sources */,
+				347C8B9E20441A1600F46D5E /* BasePickerView.m in Sources */,
 				341C62CB2007746400FC4EEB /* HotCityTableViewCell.m in Sources */,
 				34C1A8DD202B1B770076C931 /* WSWebViewController.m in Sources */,
 				34450A13200DC9390022FBE1 /* XLRefreshAnimationLayer.m in Sources */,

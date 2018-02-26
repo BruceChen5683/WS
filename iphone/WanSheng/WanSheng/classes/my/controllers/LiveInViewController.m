@@ -31,6 +31,8 @@
 
 #import "SuccessViewController.h"
 
+#import "SinglePickerView.h"
+
 @interface LiveInViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,UITextViewDelegate>
 
 @property(nonatomic, strong) NSMutableArray *uploadedImageDataArray;
@@ -65,9 +67,11 @@
 //广告
 @property (weak, nonatomic) IBOutlet UITextView *businessAdvertismentTxtView;
 
-@property (weak, nonatomic) IBOutlet UIButton *normalBusinessBtn;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLbl;
 
-@property (weak, nonatomic) IBOutlet UIButton *highLevelBusinessBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *moneyClickBtn;
+
 //推荐人
 @property (weak, nonatomic) IBOutlet UITextField *recommenderNumber;
 /////
@@ -76,7 +80,7 @@
 
 @property (strong, nonatomic) CustomPickerView *pickerView;
 
-@property(nonatomic, assign) NSInteger normalBusinesFlag;
+@property(nonatomic, assign) NSInteger businessMoney;
 
 @end
 
@@ -93,7 +97,7 @@
     self.uploadCollectionView.dataSource = self;
     ////
     
-    self.normalBusinesFlag = 1;
+    self.businessMoney = 100;
     
     self.businessManagedZoneTxtView.layer.borderWidth = 0.5;
     self.businessManagedZoneTxtView.layer.borderColor = [UIColor grayColor].CGColor;
@@ -107,6 +111,7 @@
     self.businessAdvertismentTxtView.delegate  = self;
     self.businessManagedZoneTxtView.tag = 6;
 
+    [self.moneyClickBtn addTarget:self action:@selector(popMoneyPickerView) forControlEvents:UIControlEventTouchUpInside];
     
     
     //////sort view
@@ -329,22 +334,16 @@
 
 #pragma mark - 普通，高级商家选择
 
-- (void)setNormalBusinesFlag:(NSInteger)normalBusinesFlag {
-    _normalBusinesFlag = normalBusinesFlag;
-    if (normalBusinesFlag == 1) {
-        [self.normalBusinessBtn setImage:[UIImage imageNamed:@"icon_my_selected"] forState:UIControlStateNormal];
-        [self.highLevelBusinessBtn setImage:[UIImage imageNamed:@"icon_my_unselected"] forState:UIControlStateNormal];
-    }
-    else {
-        [self.normalBusinessBtn setImage:[UIImage imageNamed:@"icon_my_unselected"] forState:UIControlStateNormal];
-        [self.highLevelBusinessBtn setImage:[UIImage imageNamed:@"icon_my_selected"] forState:UIControlStateNormal];
-    }
+- (void)setBusinessMoney:(NSInteger)businessMoney {
+    _businessMoney = businessMoney;
+    self.moneyLbl.text = [NSString stringWithFormat:@"%ld元",(long)businessMoney];
 }
-- (IBAction)normalBuniessClicked:(id)sender {
-    self.normalBusinesFlag = 1;
-}
-- (IBAction)highLevelBusinessClicked:(id)sender {
-    self.normalBusinesFlag = 2;
+
+- (void)popMoneyPickerView {
+    NSArray *array = @[@"20",@"50",@"80",@"100",@"150",@"200",@"500",@"1000",@"2000"];
+    [SinglePickerView showWithDataArray:array block:^(NSString *str, NSInteger index) {
+        self.businessMoney = [str integerValue];
+    } bottomDistance:[AdaptFrame ws_bottom:self.view] defaultV:self.businessMoney];
 }
 
 #pragma mark - 提交审核
@@ -390,14 +389,11 @@
         }
     }
     [params setValue:adstrr forKey:@"imageIdStr"];
-    if (self.normalBusinesFlag == 1) {
-        [params setValue:@"normal" forKey:@"type"];
-    } else {
-        [params setValue:@"vip" forKey:@"type"];
-    }
+
+    [params setValue:[NSString stringWithFormat:@"%ld",(long)self.businessMoney] forKey:@"type"];
     
     if (self.recommenderNumber.text.length > 0) {
-        [params setValue:self.recommenderNumber.text forKey:@"referee"];
+        [params setValue:self.recommenderNumber.text forKey:@"refereeCellphone"];
     }
     
     CTURLModel *model = [CTURLModel initWithUrl:[BaseUrl stringByAppendingString:@"merchant/addMerchant"] params:params];
@@ -427,20 +423,16 @@
 - (void)invokeZFB:(NSNumber *)number {
     NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"ZFBView" owner:self options:nil];
     ZFBView *zfbView = (ZFBView *)nibs[0];
-    if (self.normalBusinesFlag == 1) {
-        //normal
-        [zfbView.payBtn setTitle:@"支付年入驻费20元" forState:UIControlStateNormal];
-    }
-    else {
-        [zfbView.payBtn setTitle:@"支付年入驻费2000元" forState:UIControlStateNormal];
-    }
+
+    [zfbView.payBtn setTitle:[NSString stringWithFormat:@"支付年入驻费%ld元",(long)self.businessMoney] forState:UIControlStateNormal];
+
     __weak typeof(self) weakSelf = self;
     zfbView.payFee = ^(NSInteger selectIdx) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (selectIdx == 0) {
             //zfb
             PPLog(@"zfb pay start");
-            [strongSelf beginPay:strongSelf.normalBusinesFlag == 1? 20.0:2000.0 number:number];
+            [strongSelf beginPay:self.businessMoney number:number];
         }
     };
     zfbView.frame = [UIScreen mainScreen].bounds;
